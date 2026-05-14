@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin Ab — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Radley:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    /* Page background rule: keep the entire page on #f7f7f5 unless intentionally redesigned site-wide. */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f7f7f5;
+      background-color: #f3f3f1;
+      color: #111111;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --bg: #f3f3f1;
+      --section-odd: #f7f7f5;
+      --section-even: #f3f3f1;
+      --surface-1: #ffffff;
+      --surface-2: #fbfbfa;
+      --surface-3: #f7f7f5;
+      --surface-4: #efefec;
+      --text-1: #111111;
+      --text-2: #2a2a2a;
+      --text-3: #5c5c5c;
+      --stroke-1: rgba(0,0,0,0.08);
+      --stroke-2: rgba(0,0,0,0.14);
+      --shadow-1: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+      --shadow-2: 0 8px 28px rgba(0,0,0,0.10);
+      --shadow-3: 0 16px 48px rgba(0,0,0,0.16);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --content-max: 1200px;
+      --wide-content-max: 1360px;
+      --page-gutter: clamp(20px, 5vw, 80px);
+      --section-block: clamp(72px, 8vw, 100px);
+      --section-heading-size: clamp(2.55rem, 4.1vw, 3.7rem);
+      --section-heading-gap: clamp(44px, 5vw, 62px);
+      --grid-gap: clamp(18px, 2.6vw, 32px);
+      --nav-offset: 96px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Radley', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    .navbar {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px;
+      width: fit-content;
+      max-width: min(95vw, 900px);
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(24px) saturate(145%);
+      -webkit-backdrop-filter: blur(24px) saturate(145%);
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 999px;
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.08),
+        0 12px 40px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease, top 0.35s ease;
+    }
+
+    .navbar.scrolled {
+      transform: scale(0.98);
+      background: rgba(255, 255, 255, 0.46);
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.10),
+        0 6px 20px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .nav-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #2a2a2a;
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: background 0.28s ease, color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-link:hover {
+      color: #111111;
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-link.active {
+      background: #111111;
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ===========================
+       SECTION COMMON
+    =========================== */
+    section {
+      position: relative;
+      padding: var(--section-block) var(--page-gutter);
+      scroll-margin-top: var(--nav-offset);
+    }
+
+    .section-heading {
+      display: block;
+      max-width: var(--wide-content-max);
+      margin: 0 auto var(--section-heading-gap);
+      font-family: 'Radley', serif;
+      font-size: var(--section-heading-size);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: #111111;
+      position: relative;
+      text-align: left;
+    }
+
+    .section-heading::after {
+      display: none;
+      content: none;
+    }
+
+    /* ===========================
+       ANIMATE ON SCROLL
+    =========================== */
+    .animate-on-scroll {
+      --scroll-translate-x: 0px;
+      --scroll-translate-y-hidden: 40px;
+      --scroll-translate-y-visible: 0px;
+      opacity: 0;
+      transform: translateX(var(--scroll-translate-x)) translateY(var(--scroll-translate-y-hidden));
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateX(var(--scroll-translate-x)) translateY(var(--scroll-translate-y-visible));
+    }
+
+    /* ===========================
+       HERO / ABOUT SECTION
+    =========================== */
+    /*
+      Alternate section backgrounds site-wide:
+      1st section = var(--section-odd)
+      2nd section = var(--section-even)
+      3rd section = var(--section-odd)
+      4th section = var(--section-even)
+      and so on.
+
+      If more sections are added later, continue this pattern so the section
+      color always alternates in order from the top of the page.
+    */
+    #home {
+      min-height: 100vh;
+      min-height: min(100svh, 860px);
+      display: flex;
+      align-items: center;
+      padding: clamp(126px, 12vw, 168px) var(--page-gutter) clamp(76px, 8vw, 110px);
+      background: #f7f7f5;
+      overflow: hidden;
+    }
+
+    .about-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .about-image-col {
+      flex: 0 0 auto;
+    }
+
+    .profile-placeholder {
+      width: 300px;
+      height: 400px;
+      background: transparent;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.65);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: none;
+      position: relative;
+      overflow: visible;
+    }
+
+
+    /* Fluent 2 surface treatments */
+
+    .edu-card,
+    .work-card,
+    .modal-box,
+    .skill-icon,
+    .carousel-btn,
+    .modal-close {
+      border: 1px solid var(--stroke-1);
+      background: var(--surface-1);
+      box-shadow: var(--shadow-1);
+    }
+
+    .edu-card:hover,
+    .work-card:hover,
+    .skill-icon:hover,
+    .carousel-btn:hover {
+      box-shadow: var(--shadow-2);
+    }
+
+    .edu-card, .work-card, .modal-box {
+      border-radius: var(--radius-lg);
+    }
+
+    .carousel-btn, .modal-close {
+      border-radius: 999px;
+    }
+
+    .edu-card-image,
+    .work-card-image,
+    .modal-image-carousel {
+      background: linear-gradient(180deg, #f8f8f6 0%, #ecece8 100%) !important;
+      border-bottom: 1px solid var(--stroke-1);
+    }
+
+    .edu-card-image::before,
+    .edu-card-image::after {
+      display: none;
+    }
+
+    .edu-card-image-icon,
+    .work-card-tag {
+      color: #111111;
+    }
+
+    .work-card-tag {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--stroke-1);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .modal-close:hover {
+      background: #111111;
+      color: #ffffff;
+      border-color: #111111;
+      box-shadow: var(--shadow-2);
+    }
+
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .modal-content,
+    .edu-card-body,
+    .work-card-body {
+      background: var(--surface-1);
+    }
+
+    .modal-tag {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .modal-desc,
+    .modal-highlights-list li,
+    .edu-desc {
+      color: var(--text-2);
+    }
+
+    .skill-canva, .skill-an, .skill-ai, .skill-ps, .skill-pr, .skill-m365, .skill-davinci, .skill-github, .skill-figma, .skill-notion {
+      background: linear-gradient(180deg, #f9f9f8 0%, #ecece8 100%);
+    }
+
+.profile-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-content-col {
+      flex: 1 1 340px;
+      max-width: 620px;
+    }
+
+    .about-greeting {
+      font-family: 'Radley', serif;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-style: italic;
+      font-weight: 700;
+      color: #111111;
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+
+    .about-subheading {
+      font-family: 'Radley', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: #2a2a2a;
+      margin-bottom: 18px;
+    }
+
+
+    /* Decorative SVGs */
+
+
+    .nav-cluster {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      max-width: calc(100vw - 24px);
+      transition: top 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+
+    #profile {
+      background: #f7f7f5;
+      padding-top: 28px;
+    }
+
+
+    .profile-quality {
+      position: relative;
+      display: inline-block;
+      font-family: 'Radley', serif;
+      font-size: clamp(2.8rem, 4.4vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: #111111;
+      font-style: italic;
+      padding-bottom: 8px;
+    }
+
+    .profile-quality::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      right: 8px;
+      bottom: 1px;
+      height: 6px;
+      opacity: 0.94;
+      transform: rotate(-1.15deg);
+      border-radius: 11px 15px 10px 13px / 62% 47% 72% 52%;
+      clip-path: polygon(0% 54%, 5% 26%, 15% 38%, 27% 16%, 41% 31%, 56% 14%, 71% 30%, 85% 20%, 100% 44%, 100% 90%, 0% 98%);
+      filter: saturate(0.98);
+    }
+
+    .profile-quality::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      right: 15px;
+      bottom: 0px;
+      height: 3px;
+      opacity: 0.42;
+      transform: rotate(-0.7deg);
+      border-radius: 999px;
+      clip-path: polygon(0% 58%, 8% 42%, 24% 54%, 45% 34%, 61% 50%, 79% 37%, 100% 52%, 100% 100%, 0% 100%);
+    }
+
+    .profile-quality.orange::after { background: linear-gradient(90deg, rgba(243,154,69,0.14) 0%, #f39a45 9%, #ee8d37 56%, rgba(243,154,69,0.22) 100%); }
+    .profile-quality.orange::before { background: rgba(214, 126, 42, 0.5); }
+
+    .profile-quality.cyan::after { background: linear-gradient(90deg, rgba(76,199,232,0.14) 0%, #4cc7e8 9%, #39bddf 56%, rgba(76,199,232,0.22) 100%); }
+    .profile-quality.cyan::before { background: rgba(43, 164, 195, 0.48); }
+
+    .profile-quality.green::after { background: linear-gradient(90deg, rgba(127,181,59,0.14) 0%, #7fb53b 9%, #73a833 56%, rgba(127,181,59,0.22) 100%); }
+    .profile-quality.green::before { background: rgba(89, 136, 33, 0.46); }
+
+
+    .quality-trigger {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .quality-trigger:focus-visible {
+      outline: 2px solid rgba(0,0,0,0.24);
+      outline-offset: 4px;
+      border-radius: var(--radius-lg);
+    }
+
+    .quality-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2050;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s ease;
+    }
+
+    .quality-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .quality-modal-box {
+      position: relative;
+      width: min(580px, 100%);
+      background: #f3f3f1;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 28px;
+      padding: 30px 30px 28px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.22), 0 8px 32px rgba(0,0,0,0.10);
+      transform: scale(0.92) translateY(12px);
+      opacity: 0;
+      transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.28s ease;
+    }
+
+    .quality-modal-backdrop.open .quality-modal-box {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .quality-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.14);
+      background: rgba(255,255,255,0.92);
+      color: #111111;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    .quality-modal-close:hover {
+      background: #111111;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.08);
+      transform: scale(1.04);
+    }
+
+    .quality-modal-title {
+      font-family: 'Radley', serif;
+      font-size: clamp(2.15rem, 3.6vw, 3rem);
+      line-height: 0.98;
+      font-style: italic;
+      font-weight: 400;
+      color: #111111;
+      margin-bottom: 18px;
+      padding-right: 42px;
+    }
+
+    .quality-modal-copy {
+      color: #2a2a2a;
+      font-size: 1rem;
+      line-height: 1.85;
+      max-width: 46ch;
+    }
+
+    /* ---------------------------
+       PROFILE — Concept 6 triptych
+       (three abstract compositions, one per quality)
+    --------------------------- */
+    .profile-shell {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+
+    .profile-triptych {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: clamp(18px, 2.4vw, 28px);
+      align-items: stretch;
+    }
+
+    .profile-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+      background: var(--surface-1);
+      border: 1px solid var(--stroke-1);
+      border-radius: var(--radius-lg);
+      padding: clamp(22px, 2.4vw, 26px) clamp(22px, 2.4vw, 26px) clamp(24px, 2.6vw, 30px);
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      overflow: hidden;
+      transition:
+        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.3s ease,
+        background 0.3s ease;
+      box-shadow: var(--shadow-1);
+    }
+
+    .profile-card:hover,
+    .profile-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--stroke-2);
+      background: var(--surface-1);
+      box-shadow: var(--shadow-2);
+    }
+
+    .profile-card:focus-visible {
+      outline: 2px solid rgba(0,0,0,0.24);
+      outline-offset: 4px;
+    }
+
+
+    .profile-card-art {
+      position: relative;
+      flex: 1 1 auto;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-card-art svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .profile-card-caption {
+      margin-top: 26px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .profile-card-caption .profile-quality {
+      font-size: clamp(2rem, 2.8vw, 2.8rem);
+      padding-bottom: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover .profile-card-caption .profile-quality {
+      transform: translateX(2px);
+    }
+
+
+    /* Art — clearer, more literal profile illustrations */
+    .profile-card-art svg {
+      overflow: visible;
+    }
+
+    .profile-art-line-draw,
+    .profile-art-flag-pole,
+    .profile-art-question,
+    .profile-art-lens,
+    .profile-art-handle,
+    .profile-art-spark {
+      fill: none;
+      stroke: #111111;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .profile-art-line-draw,
+    .profile-art-question,
+    .profile-art-lens,
+    .profile-art-handle {
+      stroke-width: 1.65;
+    }
+
+    .profile-art-flag-pole,
+    .profile-art-spark {
+      stroke-width: 1.5;
+    }
+
+    .profile-art-accent-green { fill: #7fb53b; }
+    .profile-art-accent-orange { stroke: #f39a45; fill: none; }
+    .profile-art-accent-cyan { fill: #4cc7e8; }
+
+    .profile-art-node,
+    .profile-art-flag,
+    .profile-art-curious-dot,
+    .profile-art-question-dot {
+      transform-box: fill-box;
+      transform-origin: center;
+      opacity: 0;
+      transform: scale(0.65);
+    }
+
+    .profile-art-spark,
+    .profile-art-question,
+    .profile-art-question-dot {
+      opacity: 0;
+    }
+
+    .profile-art-line-draw,
+    .profile-art-lens,
+    .profile-art-handle,
+    .profile-art-question {
+      stroke-dasharray: 260;
+      stroke-dashoffset: 260;
+    }
+
+    .profile-card.is-visible .profile-art-line-draw,
+    .profile-card.is-visible .profile-art-lens,
+    .profile-card.is-visible .profile-art-handle,
+    .profile-card.is-visible .profile-art-question {
+      animation: profile-line-draw 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+
+    .profile-card.is-visible .profile-art-node,
+    .profile-card.is-visible .profile-art-flag,
+    .profile-card.is-visible .profile-art-curious-dot,
+    .profile-card.is-visible .profile-art-question-dot {
+      animation: profile-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .profile-card.is-visible .profile-art-spark {
+      animation: profile-fade-in 0.4s ease forwards;
+    }
+
+    .profile-card.is-visible .profile-art-node:nth-of-type(2) { animation-delay: 0.45s; }
+    .profile-card.is-visible .profile-art-node:nth-of-type(3) { animation-delay: 0.62s; }
+    .profile-card.is-visible .profile-art-flag { animation-delay: 0.78s; }
+    .profile-card.is-visible .profile-art-spark-1 { animation-delay: 0.72s; }
+    .profile-card.is-visible .profile-art-spark-2 { animation-delay: 0.82s; }
+    .profile-card.is-visible .profile-art-curious-dot:nth-of-type(3) { animation-delay: 0.40s; }
+    .profile-card.is-visible .profile-art-curious-dot:nth-of-type(4) { animation-delay: 0.54s; }
+    .profile-card.is-visible .profile-art-curious-dot:nth-of-type(5) { animation-delay: 0.68s; }
+    .profile-card.is-visible .profile-art-question { animation-delay: 0.35s; }
+    .profile-card.is-visible .profile-art-question-dot { animation-delay: 0.82s; }
+
+    @keyframes profile-line-draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes profile-pop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes profile-fade-in {
+      to { opacity: 1; }
+    }
+
+    /* Reduced motion: render compositions in their final state, no animation */
+    @media (prefers-reduced-motion: reduce) {
+      .profile-card,
+      .profile-card-caption .profile-quality,
+      .profile-art-line-draw,
+          .profile-art-lens,
+      .profile-art-handle,
+      .profile-art-question {
+        stroke-dashoffset: 0;
+        animation: none !important;
+      }
+      .profile-art-node,
+      .profile-art-flag,
+      .profile-art-curious-dot,
+      .profile-art-question-dot {
+        opacity: 1;
+        transform: scale(1);
+        animation: none !important;
+      }
+        .profile-art-spark {
+        opacity: 1;
+        animation: none !important;
+      }
+    }
+
+
+    /* ===========================
+       EDUCATION SECTION
+    =========================== */
+    #education {
+      background: #f7f7f5;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: var(--grid-gap);
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .edu-card {
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(139, 69, 19, 0.09), 0 1px 4px rgba(0,0,0,0.05);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .edu-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow:
+        0 20px 56px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(139, 69, 19, 0.07),
+        0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    .edu-card-image {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      min-height: 140px;
+      max-height: 190px;
+      padding: 18px;
+      background: transparent !important;
+      border-bottom: 1px solid var(--stroke-1);
+    }
+
+    .edu-card-image::before,
+    .edu-card-image::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    .edu-card-image-icon {
+      display: none !important;
+    }
+
+    .edu-card-image-frame {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .edu-card-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .edu-card-body {
+      padding: 26px;
+    }
+
+    .edu-uni {
+      font-family: 'Radley', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #111111;
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+
+    .edu-degree {
+      font-style: italic;
+      color: #111111;
+      font-size: 0.875rem;
+      margin-bottom: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .edu-desc {
+      color: #2a2a2a;
+      font-size: 0.875rem;
+      line-height: 1.65;
+    }
+
+    .edu-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .edu-points li {
+      position: relative;
+      padding-left: 14px;
+      color: #2a2a2a;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .edu-points li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #5c5c5c;
+    }
+
+    /* ===========================
+       SELECTED WORKS SECTION
+    =========================== */
+    #works {
+      background: #f7f7f5;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #works .section-heading {
+      /* Desktop: no extra inset here, because .section-heading is already centered with max-width.
+         Smaller breakpoints add padding back so the heading aligns with section content. */
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      margin-bottom: 20px;
+      padding: 8px 0;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel-wrapper.is-dragging {
+      cursor: grabbing;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: max-content;
+    }
+
+    .carousel-row-1 .carousel-track,
+    .carousel-row-2 .carousel-track {
+      animation: none;
+      will-change: transform;
+    }
+
+    @keyframes scrollLeft {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-5 * (240px + 24px))); }
+    }
+
+    @keyframes scrollRight {
+      0%   { transform: translateX(calc(-5 * (240px + 24px))); }
+      100% { transform: translateX(0); }
+    }
+
+    .work-card {
+      width: 240px;
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      margin-right: 24px;
+    }
+
+    .work-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    
+    .work-card-image {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f8f8f6 0%, #ecece8 100%);
+    }
+
+    .work-card-image-bg {
+      position: absolute;
+      inset: -10px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(22px) saturate(1.02);
+      transform: scale(1.12);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .work-card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .work-card-image-frame {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .work-card-image-frame img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+
+    .work-card-tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .work-card-body {
+      padding: 16px 18px 18px;
+    }
+
+    .work-card-title {
+      font-family: 'Radley', serif;
+      font-size: 0.975rem;
+      font-weight: 400;
+      color: #111111;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .work-card-highlights {
+      color: #6a6a6a;
+      font-size: 0.76rem;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      font-weight: 400;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .work-card-arrow {
+      min-width: 34px;
+      height: 24px;
+      padding: 0 3px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: #111111;
+      color: #f3f3f1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+      line-height: 1;
+      font-size: 0;
+    }
+
+            .work-card-arrow svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      overflow: visible;
+      stroke: currentColor;
+      stroke-width: 2.25;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+
+    .work-card:hover .work-card-arrow {
+      transform: translateX(4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+
+    /* Carousel Controls */
+    .carousel-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 28px;
+      padding-right: 80px;
+    }
+
+    .carousel-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #111111;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+      transform: scale(1.06);
+    }
+
+    .carousel-btn.paused {
+      background: #111111;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ===========================
+       SKILLS SECTION
+    =========================== */
+    #skills {
+      background: #f7f7f5;
+      padding-top: 90px;
+      padding-bottom: 120px;
+    }
+
+    #skills .section-heading::after {
+      display: none;
+      content: none;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+      gap: clamp(14px, 2.4vw, 36px);
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .skill-icon {
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      background: #ffffff;
+      border: none;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03);
+      padding: 0;
+      gap: 0;
+      overflow: hidden;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .skill-icon:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .skill-icon-tile {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: block;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      background: transparent;
+      border: none;
+    }
+
+    .skill-icon-media {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+      border: none;
+      overflow: hidden;
+    }
+
+    .skill-icon-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .skill-icon-body {
+      min-height: 80px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 13px 15px 15px;
+      gap: 4px;
+    }
+
+    .skill-icon-title {
+      font-family: 'Radley', serif;
+      font-size: 0.97rem;
+      line-height: 1.18;
+      color: #111111;
+    }
+
+    .skill-icon-meta {
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: #6a6a6a;
+      font-style: italic;
+    }
+
+    /* ===========================
+       CONTACT / FOOTER
+    =========================== */
+    #contact {
+      background: #f7f7f5;
+      text-align: left;
+      padding-top: 56px;
+      padding-bottom: 96px;
+    }
+
+    .contact-inner {
+      max-width: var(--wide-content-max);
+      margin: 0 auto;
+      border-radius: clamp(24px, 4vw, 42px);
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255,255,255,0.74);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+      padding: clamp(30px, 4.8vw, 56px);
+    }
+
+    .contact-heading {
+      display: block;
+      max-width: 900px;
+      margin: 0 0 62px;
+      font-family: 'Radley', serif;
+      font-size: clamp(2.55rem, 4.1vw, 3.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: #111111;
+    }
+
+    .contact-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: rgba(245,245,245,0.96);
+      border: 1px solid rgba(0,0,0,0.04);
+      color: #565656;
+      font-size: 0.95rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.78);
+    }
+
+    .contact-pill i {
+      color: #4a4a4a;
+      font-size: 0.92rem;
+    }
+
+    .resume-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      background: rgba(245,245,245,0.96);
+      border: 1px solid rgba(0,0,0,0.04);
+      color: #333333;
+      font-size: 0.98rem;
+      font-weight: 500;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.78);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .resume-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    /* ===========================
+       MODAL
+    =========================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 14, 6, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: #f3f3f1;
+      border-radius: 28px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.82) translateY(20px);
+      opacity: 0;
+      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #111111;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .modal-close:hover {
+      background: #111111;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Modal Image Carousel */
+    .modal-image-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px 28px 0 0;
+      height: clamp(220px, 42vh, 320px);
+      background: linear-gradient(135deg, #1a1a1a, #111111);
+    }
+
+    .modal-image-display-frame {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+      padding: 0;
+    }
+
+    .modal-image-display-media {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-image-carousel.has-embed {
+      height: clamp(430px, 72vh, 640px);
+      background: #ffffff;
+    }
+
+    .modal-instagram-iframe {
+      width: min(100%, 420px);
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #ffffff;
+    }
+
+    .modal-img-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.14);
+      background: rgba(255, 255, 255, 0.92);
+      color: #111111;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    .modal-img-btn:hover {
+      background: rgba(255,255,255,1);
+      color: #111111;
+      transform: translateY(-50%) scale(1.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    .modal-img-btn-prev { left: 14px; }
+    .modal-img-btn-next { right: 14px; }
+
+    .modal-img-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index: 10;
+    }
+
+    .modal-img-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      transition: background 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .modal-img-dot.active {
+      background: #fff;
+      transform: scale(1.25);
+    }
+
+    /* Modal Content */
+    .modal-content {
+      padding: 32px 36px 36px;
+    }
+
+    .modal-title {
+      font-family: 'Radley', serif;
+      font-size: 1.85rem;
+      font-weight: 400;
+      color: #111111;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .modal-tag {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fff;
+      background: #111111;
+      margin-bottom: 22px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .modal-desc {
+      color: #2a2a2a;
+      line-height: 1.85;
+      margin-bottom: 28px;
+      font-size: 0.97rem;
+    }
+
+    .modal-highlights-heading {
+      font-family: 'Radley', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 16px;
+    }
+
+    .modal-highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #2a2a2a;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .modal-highlights-list li::before {
+      content: '→';
+      color: #111111;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-weight: 600;
+    }
+
+    /* Modal scrollbar */
+    .modal-box,
+    .quality-modal-box {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(17,17,17,0.24) transparent;
+    }
+
+    .modal-box::-webkit-scrollbar,
+    .quality-modal-box::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal-box::-webkit-scrollbar-track,
+    .quality-modal-box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modal-box::-webkit-scrollbar-thumb,
+    .quality-modal-box::-webkit-scrollbar-thumb {
+      background: rgba(17,17,17,0.24);
+      border-radius: 999px;
+    }
+
+    .modal-box::-webkit-scrollbar-thumb:hover,
+    .quality-modal-box::-webkit-scrollbar-thumb:hover {
+      background: rgba(17,17,17,0.38);
+    }
+
+
+    /* ===========================
+       HERO OVERRIDES
+    =========================== */
+
+    .about-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(32px, 6vw, 72px);
+      --scroll-translate-x: 10%;
+    }
+
+    .about-image-col {
+      flex: 0 1 clamp(220px, 30vw, 360px);
+      width: clamp(220px, 30vw, 360px);
+    }
+
+    .profile-placeholder {
+      width: 100%;
+      height: auto;
+      background: transparent;
+      border-radius: 0;
+      display: block;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .profile-placeholder::before,
+    .profile-placeholder::after,
+    .profile-placeholder span {
+      display: none !important;
+      content: none !important;
+    }
+
+    .profile-placeholder img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      background: transparent;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,0.10));
+    }
+
+    .about-content-col {
+      flex: 1 1 340px;
+      max-width: 620px;
+    }
+
+    .about-greeting {
+      font-family: 'Radley', serif;
+      font-size: clamp(3.4rem, 7vw, 6rem);
+      font-style: normal;
+      font-weight: 400;
+      color: #111111;
+      line-height: 0.95;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .about-greeting .hello-italic {
+      font-style: italic;
+    }
+
+    .about-subheading {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 400;
+      color: #5c5c5c;
+      margin-bottom: 0;
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+
+    /* ===========================
+       RESPONSIVE
+       Content-driven grids handle most in-between widths. Breakpoints below only
+       preserve intentional aesthetic shifts: tighter desktop spacing, stacked
+       hero/card treatment, and phone nav docking.
+    =========================== */
+    @media (max-width: 1100px) {
+      :root {
+        --page-gutter: clamp(28px, 4.4vw, 48px);
+        --section-block: 80px;
+        --grid-gap: clamp(22px, 2.4vw, 28px);
+      }
+      #works .section-heading { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+      .carousel-controls { padding-right: var(--page-gutter); }
+    }
+
+    @media (max-width: 860px) {
+      :root {
+        --page-gutter: 28px;
+        --section-block: 80px;
+      }
+      #home { padding-top: 138px; padding-bottom: 84px; }
+      #works .section-heading { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+      .carousel-controls { padding-right: var(--page-gutter); }
+      .about-container { flex-direction: column; gap: 60px; text-align: center; --scroll-translate-x: 0px; }
+      .about-image-col { width: min(62vw, 320px); flex-basis: min(62vw, 320px); }
+      .about-greeting { font-size: clamp(3rem, 12vw, 4.6rem); }
+      .about-subheading { margin: 0 auto; }
+      .profile-placeholder { width: 250px; height: 333px; margin: 0 auto; }
+
+      /* Intentional tablet/mobile reading mode: one focused card per row. */
+      .profile-triptych {
+        grid-template-columns: 1fr;
+        max-width: min(480px, calc(100vw - (var(--page-gutter) * 2)));
+        margin: 0 auto;
+        gap: 22px;
+      }
+      .profile-card-art { aspect-ratio: 16 / 9; max-height: 180px; margin-top: 16px; }
+      .profile-card-caption { margin-top: 22px; }
+      .profile-card-caption .profile-quality { font-size: clamp(2.2rem, 8vw, 2.8rem); }
+
+      .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 29px; }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --page-gutter: 20px;
+        --section-block: 72px;
+        --nav-offset: 76px;
+      }
+
+      .nav-cluster {
+        top: 12px;
+        gap: 8px;
+        max-width: calc(100vw - 16px);
+        --mobile-nav-height: 52px;
+      }
+
+      .nav-cluster.mobile-bottom-docked {
+        top: calc(100dvh - var(--mobile-nav-height, 52px) - env(safe-area-inset-bottom, 0px) - 12px);
+      }
+
+      .navbar { padding: 6px; gap: 2px; max-width: calc(100vw - 68px); overflow-x: auto; justify-content: flex-start; }
+      .nav-link { font-size: 0.75rem; padding: 8px 12px; }
+      #home { padding-top: 126px; padding-bottom: 76px; }
+      #works .section-heading { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+      .carousel-controls { padding-right: var(--page-gutter); justify-content: center; }
+
+      .education-grid {
+        max-width: min(360px, calc(100vw - (var(--page-gutter) * 2)));
+        gap: 17px;
+      }
+      .profile-triptych {
+        max-width: min(360px, calc(100vw - (var(--page-gutter) * 2)));
+        gap: 18px;
+      }
+      .profile-card { border-radius: 18px; }
+      .profile-card-art { aspect-ratio: 16 / 10; max-height: 160px; margin-top: 14px; }
+      .profile-card-caption { margin-top: 18px; }
+      .edu-card { border-radius: 18px; }
+      .edu-card-image { min-height: 140px; max-height: 170px; padding: 12px; }
+      .edu-card-body { padding: 16px 16px 18px; }
+      .edu-uni { font-size: 0.92rem; line-height: 1.3; margin-bottom: 5px; }
+      .edu-degree { font-size: 0.76rem; line-height: 1.4; margin-bottom: 10px; }
+      .edu-desc { font-size: 0.8rem; line-height: 1.5; }
+      .edu-points { gap: 6px; }
+      .edu-points li { font-size: 0.8rem; line-height: 1.48; padding-left: 12px; }
+
+      .skills-grid { max-width: 100%; grid-template-columns: repeat(2, minmax(112px, 1fr)); gap: 14px; }
+      .skill-icon { border-radius: 15px; }
+      .skill-icon-body { min-height: 68px; padding: 10px 11px 12px; }
+      .skill-icon-title { font-size: 0.84rem; }
+      .skill-icon-meta { font-size: 0.68rem; }
+      .modal-content { padding: 24px 22px 28px; }
+    }
+
+
+</style>
+</head>
+<body>
+
+  <!-- ===========================
+       NAVBAR
+  =========================== -->
+  <div class="nav-cluster">
+<nav class="navbar" id="navbar">
+    <a class="nav-link active" href="#home">Home</a>
+    <a class="nav-link" href="#profile">Profile</a>
+    <a class="nav-link" href="#education">Education</a>
+    <a class="nav-link" href="#works">Selected Works</a>
+    <a class="nav-link" href="#skills">Skills &amp; Tools</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </nav>
+  </div>
+
+  <!-- ===========================
+       HERO / ABOUT SECTION
+  =========================== -->
+  <section id="home">
+    <div class="about-inner">
+      <div class="about-container animate-on-scroll">
+        <div class="about-image-col">
+          <div class="profile-placeholder">
+            <img src="hero.png" alt="Profile picture">
+          </div>
+        </div>
+        <div class="about-content-col">
+          <h1 class="about-greeting"><span class="hello-italic">Hello,</span><br>my name is<br>Kevin Ab!</h1>
+          <p class="about-subheading">I create thoughtful, emotionally resonant visual experiences across brand, digital, and storytelling systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       EDUCATION SECTION
+  =========================== -->
+
+  <section id="profile">
+    <h2 class="section-heading animate-on-scroll">A little bit about me</h2>
+    <div class="profile-shell">
+      <div class="profile-triptych animate-on-scroll">
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality1" aria-label="Committed">
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path class="profile-art-line-draw" d="M34 124 C58 112, 76 98, 94 96 C111 95, 123 104, 140 98 C159 91, 175 70, 192 38"/>
+              <circle class="profile-art-node profile-art-accent-green" cx="94" cy="96" r="5"/>
+              <circle class="profile-art-node profile-art-accent-green" cx="140" cy="98" r="5"/>
+              <path class="profile-art-flag-pole" d="M192 38 L192 116"/>
+              <path class="profile-art-flag profile-art-accent-green" d="M192 42 L220 50 L192 60 Z"/>
+            </svg>
+          </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality green">Committed</span>
+          </div>
+        </button>
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality2" aria-label="Creative">
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <circle class="profile-art-node" cx="120" cy="82" r="5.5" style="fill:#f39a45;"/>
+              <path class="profile-art-line-draw" d="M120 82 C106 69, 94 59, 76 48"/>
+              <path class="profile-art-line-draw" d="M120 82 C136 67, 152 57, 174 46"/>
+              <path class="profile-art-line-draw" d="M120 82 C104 95, 94 108, 84 124"/>
+              <path class="profile-art-line-draw" d="M120 82 C138 94, 154 106, 174 122"/>
+              <circle class="profile-art-node" cx="76" cy="48" r="4.6" style="fill:#f39a45;"/>
+              <circle class="profile-art-node" cx="174" cy="46" r="4.6" style="fill:#f39a45;"/>
+              <circle class="profile-art-node" cx="84" cy="124" r="4.6" style="fill:#f39a45;"/>
+              <circle class="profile-art-node" cx="174" cy="122" r="4.6" style="fill:#f39a45;"/>
+              <path class="profile-art-spark profile-art-spark-1" d="M120 44 L120 30 M113 37 L127 37"/>
+              <path class="profile-art-spark profile-art-spark-2" d="M190 72 L202 72 M196 66 L196 78"/>
+            </svg>
+          </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality orange">Creative</span>
+          </div>
+        </button>
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality3" aria-label="Curious">
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <g transform="translate(120 80) scale(1.1) translate(-120 -80)">
+                <circle class="profile-art-lens" cx="106" cy="76" r="34"/>
+                <path class="profile-art-handle" d="M130 100 L164 134"/>
+                <circle class="profile-art-curious-dot profile-art-accent-cyan" cx="98" cy="72" r="4.5"/>
+                <circle class="profile-art-curious-dot profile-art-accent-cyan" cx="114" cy="84" r="4.5"/>
+                <circle class="profile-art-curious-dot profile-art-accent-cyan" cx="126" cy="64" r="4.5"/>
+                <path class="profile-art-question" d="M180 50 C180 38, 170 30, 156 30 C146 30, 136 35, 130 44 M156 30 C171 30, 182 39, 182 52 C182 63, 173 68, 164 74 C157 79, 154 83, 154 91"/>
+                <circle class="profile-art-question-dot profile-art-accent-cyan" cx="154" cy="108" r="3.5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality cyan">Curious</span>
+          </div>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+
+    <h2 class="section-heading animate-on-scroll">Education</h2>
+    <div class="education-grid">
+      <div class="edu-card animate-on-scroll" style="transition-delay:0s;">
+        <div class="edu-card-image">
+          <div class="edu-card-image-frame"><img src="edu1.png" alt="Education image 1"></div>
+        </div>
+        <div class="edu-card-body">
+          <div class="edu-uni">Durham University</div>
+          <div class="edu-degree">Exchange Student, Department of Management &amp; Marketing</div>
+          <ul class="edu-points">
+            <li>Achieved a distinction-level average across coursework</li>
+            <li>Marketing Officer for PalTV, Durham&rsquo;s award-winning student TV station</li>
+          </ul>
+        </div>
+      </div>
+      <div class="edu-card animate-on-scroll" style="transition-delay:0.12s;">
+        <div class="edu-card-image" style="background: linear-gradient(135deg, #B07040 0%, #6B2F0E 100%);">
+          <div class="edu-card-image-frame"><img src="edu2.png" alt="Education image 2"></div>
+        </div>
+        <div class="edu-card-body">
+          <div class="edu-uni">National Sun Yat-sen University</div>
+          <div class="edu-degree">Master of Business Administration in International Business</div>
+          <ul class="edu-points">
+            <li>GPA: 4.21 / 4.3</li>
+            <li>Winner of Hult Prize OnCampus at NSYSU 2024</li>
+          </ul>
+        </div>
+      </div>
+      <div class="edu-card animate-on-scroll" style="transition-delay:0.24s;">
+        <div class="edu-card-image" style="background: linear-gradient(135deg, #111111 0%, #111111 100%);">
+          <div class="edu-card-image-frame"><img src="edu3.png" alt="Education image 3"></div>
+        </div>
+        <div class="edu-card-body">
+          <div class="edu-uni">National Pingtung University</div>
+          <div class="edu-degree">Bachelor of Arts, English</div>
+          <ul class="edu-points">
+            <li>GPA: 4.0 / 4.0; graduated first in class</li>
+            <li>Eight-time Academic Achievement Award recipient</li>
+            <li>Co-wrote and performed in an original stage production</li>
+            <li>Trained Teacher of Chinese as a Foreign Language</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SELECTED WORKS SECTION
+  =========================== -->
+  <section id="works">
+    <h2 class="section-heading animate-on-scroll">Selected Works</h2>
+
+    <!-- Row 1: scrolls left -->
+    <div class="carousel-wrapper carousel-row-1" id="carousel-wrapper-1">
+      <div class="carousel-track" id="carousel-track-1"></div>
+    </div>
+
+    <!-- Row 2: scrolls right -->
+    <div class="carousel-wrapper carousel-row-2" id="carousel-wrapper-2">
+      <div class="carousel-track" id="carousel-track-2"></div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="carousel-btn-left" title="Move left" aria-label="Move carousel left">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button class="carousel-btn paused" id="carousel-btn-toggle" title="Pause autoplay" aria-label="Pause autoplay">
+        <i class="fas fa-pause"></i>
+      </button>
+      <button class="carousel-btn" id="carousel-btn-right" title="Move right" aria-label="Move carousel right">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SKILLS SECTION
+  =========================== -->
+  <section id="skills">
+    <h2 class="section-heading animate-on-scroll">Skills &amp; Tools</h2>
+    <div class="skills-grid animate-on-scroll" style="transition-delay:0.1s;">
+      <div class="skill-icon skill-canva"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon1.png" alt="Canva app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Canva</div><div class="skill-icon-meta">Design platform</div></div></div>
+      <div class="skill-icon skill-affinity"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon2.png" alt="Affinity Suite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Affinity Suite</div><div class="skill-icon-meta">Creative suite</div></div></div>
+      <div class="skill-icon skill-illustrator"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon3.png" alt="Illustrator app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Illustrator</div><div class="skill-icon-meta">Vector design</div></div></div>
+      <div class="skill-icon skill-photoshop"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon4.png" alt="Photoshop app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Photoshop</div><div class="skill-icon-meta">Image editing</div></div></div>
+      <div class="skill-icon skill-premiere"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon5.png" alt="Premiere Pro app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Premiere Pro</div><div class="skill-icon-meta">Video editing</div></div></div>
+      <div class="skill-icon skill-m365"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon6.png" alt="Microsoft 365 app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title" >Microsoft 365 (Office)</div><div class="skill-icon-meta">Productivity suite</div></div></div>
+      <div class="skill-icon skill-meta"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon7.png" alt="Meta Business Suite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Meta Business Suite</div><div class="skill-icon-meta">Social media management</div></div></div>
+      <div class="skill-icon skill-hootsuite"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon8.png" alt="Hootsuite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Hootsuite</div><div class="skill-icon-meta">Social media analytics</div></div></div>
+      <div class="skill-icon skill-github"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon9.png" alt="GitHub app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">GitHub</div><div class="skill-icon-meta">Vibecoding and hosting</div></div></div>
+      <div class="skill-icon skill-davinci"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon10.png" alt="DaVinci Resolve app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">DaVinci Resolve</div><div class="skill-icon-meta">Video editing</div></div></div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CONTACT / FOOTER SECTION
+  =========================== -->
+  <section id="contact">
+    <div class="contact-inner animate-on-scroll">
+      <h2 class="contact-heading">Let’s build something elegant, alive, and memorable.</h2>
+      <div class="contact-bottom">
+        <div class="contact-pills">
+          <div class="contact-pill"><i class="far fa-user"></i><span>Kevin Ab</span></div>
+          <div class="contact-pill"><i class="far fa-envelope"></i><span>kevinab@mozmail.com</span></div>
+          <div class="contact-pill"><i class="fas fa-location-dot"></i><span>Taiwan</span></div>
+        </div>
+        <a href="mailto:kevinab@mozmail.com?subject=Request%20References" class="resume-button">Request References <i class="fas fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       MODAL
+  =========================== -->
+  
+  <div class="quality-modal-backdrop" id="quality-modal-backdrop" aria-hidden="true">
+    <div class="quality-modal-box" role="dialog" aria-modal="true" aria-labelledby="quality-modal-title">
+      <button class="quality-modal-close" id="quality-modal-close" aria-label="Close quality details">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3 class="quality-modal-title" id="quality-modal-title">Quality</h3>
+      <p class="quality-modal-copy" id="quality-modal-copy"></p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Modal Image Carousel -->
+      <div class="modal-image-carousel" id="modal-image-carousel">
+        <div class="modal-image-display-frame" id="modal-media-frame">
+          <img class="modal-image-display-media" id="modal-image-display" alt="">
+        </div>
+        <button class="modal-img-btn modal-img-btn-prev" id="modal-img-prev" aria-label="Previous image">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-img-btn modal-img-btn-next" id="modal-img-next" aria-label="Next image">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-img-dots" id="modal-img-dots"></div>
+      </div>
+
+      <!-- Modal Text Content -->
+      <div class="modal-content">
+        <h2 class="modal-title" id="modal-title-el"></h2>
+        <span class="modal-tag" id="modal-tag"></span>
+        <p class="modal-desc" id="modal-desc"></p>
+        <h3 class="modal-highlights-heading">Key Highlights</h3>
+        <ul class="modal-highlights-list" id="modal-highlights"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ===========================
+       PROJECT DATA
+    =========================== */
+    const projects = [
+      {
+        id: 1,
+        title: "Intern Roundtable Recruitment Video",
+        tag: "Video",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Co-led and produced an Intern Roundtable video project designed to support recruitment for the next intern cohort. Worked with fellow interns to shape the concept, coordinate production, and deliver a polished piece that communicated the intern experience in an engaging and authentic way.",
+        highlights: [
+          "10K+ reach and 700+ engagements",
+          "Co-led concept development and production with a cross-intern team",
+          "Helped drive stronger applicant interest than the previous cycle",
+          "Cited by multiple candidates during the interview process"
+        ],
+        coverImage: "p1-0.png",
+        images: [
+          "p1-1.png",
+          "p1-2.png",
+          "p1-3.png"
+        ]
+      },
+      {
+        id: 2,
+        title: "Cybersecurity Awareness Comic Series",
+        tag: "Campaign",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Created a mascot-led comic series for PD’s cybersecurity awareness campaign, combining generative AI tools with careful creative direction to produce content that felt polished, original, and audience-friendly. The series helped make a technical topic more approachable and engaging.",
+        highlights: [
+          "Nearly 3K reactions per post",
+          "Developed a recurring comic format centered on the office mascot",
+          "Used generative AI thoughtfully to support creative direction",
+          "Turned a technical topic into accessible, engaging content"
+        ],
+        coverImage: "p2-0.png",
+        images: [
+          "p2-1.png",
+          "p2-2.png",
+          "p2-3.png"
+        ]
+      },
+      {
+        id: 3,
+        title: "Gen Alpha Slang Campaign",
+        tag: "Social Media",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Developed a youth-oriented social campaign using Gen Alpha slang and the office mascot to connect with younger audiences in a playful, platform-native way. Though built around one post, the campaign involved multiple bespoke visuals and a tailored creative approach.",
+        highlights: [
+          "Most-shared Instagram post of the year",
+          "Created a culturally current campaign aimed at younger audiences",
+          "Designed multiple custom assets and supporting visuals",
+          "Generated 200+ shares on AIT’s Instagram"
+        ],
+        coverImage: "p3-0.png",
+        images: [
+          "p3-1.png",
+          "p3-2.png",
+          "p3-3.png"
+        ]
+      },
+      {
+        id: 4,
+        title: "Dragon Boat Race Teaser Reel",
+        tag: "Video",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Produced teaser reel content for the Dragon Boat Race that gained strong traction across platforms and was shared by the host city government. The piece expanded visibility beyond AIT’s own audience and became one of the standout social posts of the year.",
+        highlights: [
+          "37K Facebook views and city-government repost",
+          "Produced teaser content for a major public-facing cultural event",
+          "Became one of the most popular posts on AIT/K’s Instagram",
+          "Delivered record Instagram video reach at the time"
+        ],
+        coverImage: "p4-0.png",
+        images: [
+          "p4-1.png",
+          "p4-2.png",
+          "p4-3.png"
+        ]
+      },
+      {
+        id: 5,
+        title: "PalTV Vox Pop Reel Series",
+        tag: "Video",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "As Marketing Officer and Editor for PalTV, coordinated with production teams and student leadership to edit, publish, and promote student media projects. Produced a series of five street-interview reels built around original questions, strong pacing, and clear visual identity.",
+        highlights: [
+          "Produced and promoted 5 original vox-pop reels",
+          "Developed original questions and audience-friendly content concepts",
+          "Edited with custom visual overlays and original title sequences",
+          "Coordinated publishing and promotion with student leadership"
+        ],
+        coverImage: "p5-0.png",
+        images: [
+          {
+            type: "instagram",
+            url: "https://www.instagram.com/reel/DXhTSofDp3E/?utm_source=ig_web_copy_link",
+            embedUrl: "https://www.instagram.com/reel/DXhTSofDp3E/embed",
+            label: "PalTV Vox Pop Reel Series — Instagram Reel"
+          },
+          "p5-2.png",
+          "p5-3.png"
+        ]
+      },
+      {
+        id: 6,
+        title: "Tripal – Hult Prize Winning Pitch",
+        tag: "Strategy",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Worked with an international team to develop and pitch Tripal, a community-focused virtual tour-guiding service, winning Hult Prize OnCampus at NSYSU 2024. The project combined business strategy, problem solving, and collaborative storytelling in a competitive startup environment.",
+        highlights: [
+          "Winner, Hult Prize OnCampus at NSYSU 2024",
+          "Co-developed a community-focused virtual tour service concept",
+          "Refined the business model and presentation with an international team",
+          "Delivered a successful pitch in a competitive startup setting"
+        ],
+        coverImage: "p6-0.png",
+        images: [
+          "p6-1.png",
+          "p6-2.png",
+          "p6-3.png"
+        ]
+      },
+      {
+        id: 7,
+        title: "American Corner Visual Display System",
+        tag: "Visual Design",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Curated themed book displays for American Corner, creating a consistent visual identity across digital and physical formats. The work combined visual organization, print support, and interactive elements to make the displays more engaging and cohesive.",
+        highlights: [
+          "Built a consistent digital and physical display identity",
+          "Curated themed displays for a public-facing cultural space",
+          "Created supporting print collateral and interactive elements",
+          "Turned routine displays into more engaging audience experiences"
+        ],
+        coverImage: "p7-0.png",
+        images: [
+          "p7-1.png",
+          "p7-2.png",
+          "p7-3.png"
+        ]
+      },
+      {
+        id: 8,
+        title: "July Fourth Reception Visuals",
+        tag: "Event Design",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Supported a July Fourth reception by preparing end-to-end visuals and presentation materials that contributed to the event’s overall flow and presentation quality. Helped create a polished guest-facing experience through coordinated event visuals.",
+        highlights: [
+          "End-to-end visuals for a high-profile reception",
+          "Prepared presentation and visual materials for a formal public event",
+          "Supported the guest experience through clear visual coordination",
+          "Delivered polished event-facing assets under real-world deadlines"
+        ],
+        coverImage: "p8-0.png",
+        images: [
+          "p8-1.png",
+          "p8-2.png",
+          "p8-3.png"
+        ]
+      },
+      {
+        id: 9,
+        title: "Social Media Performance Reporting",
+        tag: "Analytics",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Monitored audience engagement and produced accessible social media performance reports to help inform strategy. Translated platform data into clear insights that supported more informed decisions around content direction and campaign planning.",
+        highlights: [
+          "Turned engagement data into actionable content insights",
+          "Tracked audience performance across social platforms",
+          "Produced reports that made data easy to understand and act on",
+          "Supported future content and campaign planning with clear analysis"
+        ],
+        coverImage: "p9-0.png",
+        images: [
+          "p9-1.png",
+          "p9-2.png",
+          "p9-3.png"
+        ]
+      },
+      {
+        id: 10,
+        title: "International Boba Day Reel",
+        tag: "Social Media",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Contributed to concept brainstorming and production support for a Boba Day reel created to connect with Taiwanese audiences through a culturally resonant, highly shareable idea. The campaign delivered exceptional results and became one of the strongest-performing pieces in account history.",
+        highlights: [
+          "219K reach and 14.6K interactions",
+          "Supported concept development and production for a culturally targeted campaign",
+          "Generated 230K+ views and 14.1K likes and reactions",
+          "Became one of the strongest-performing posts in account history"
+        ],
+        coverImage: "p10-0.png",
+        images: [
+          "p10-1.png",
+          "p10-2.png",
+          "p10-3.png"
+        ]
+      }
+    ];
+
+    /* ===========================
+       BUILD CAROUSEL CARDS
+    =========================== */
+    function createCard(project) {
+      const card = document.createElement('div');
+      card.className = 'work-card';
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'View project: ' + project.title);
+      card.innerHTML =
+        '<div class="work-card-image" style="background:linear-gradient(140deg,' + project.gradientA + ',' + project.gradientB + ');">' +
+          '<div class="work-card-image-bg" style="background-image:url(&quot;' + (project.coverImage || project.images[0]) + '&quot;);"></div>' +
+          '<div class="work-card-image-frame">' +
+            '<img src="' + (project.coverImage || project.images[0]) + '" alt="' + project.title + ' preview">' +
+          '</div>' +
+          '<span class="work-card-tag">' + project.tag + '</span>' +
+        '</div>' +
+        '<div class="work-card-body">' +
+          '<div class="work-card-title">' + project.title + '</div>' +
+          '<div class="work-card-highlights"># ' + (project.highlights[0] || '') + '</div>' +
+          '<div class="work-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></div>' +
+        '</div>';
+      card.addEventListener('click', function() { openModal(project.id); });
+      card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(project.id); } });
+      return card;
+    }
+
+    var track1 = document.getElementById('carousel-track-1');
+    var track2 = document.getElementById('carousel-track-2');
+    var row1Projects = projects.slice(0, 5);
+    var row2Projects = projects.slice(5, 10);
+
+    // Repeat each row enough times that manual swipes never expose the end of the track.
+    // The loop still wraps by the width of one original project set, so the sequence remains seamless.
+    var LOOP_COPIES = 4;
+
+    function fillCarouselTrack(track, rowProjects) {
+      for (var copy = 0; copy < LOOP_COPIES; copy++) {
+        rowProjects.forEach(function(p) {
+          track.appendChild(createCard(p));
+        });
+      }
+    }
+
+    // Row 1 owns works 1–5. Copies are only duplicates for seamless looping.
+    fillCarouselTrack(track1, row1Projects);
+    // Row 2 owns works 6–10. Copies are only duplicates for seamless looping.
+    fillCarouselTrack(track2, row2Projects);
+
+    /* ===========================
+       CAROUSEL CONTROLS
+    =========================== */
+    var row1Dir = -1; // -1 = left, 1 = right
+    var autoplay = true;
+    var pxPerSecond = 18;
+    var stepAmount = 170;
+    var rafId = null;
+    var lastTs = 0;
+    var track1X = 0;
+    var track2X = 0;
+    var loop1Width = 0;
+    var loop2Width = 0;
+
+    var btnLeft = document.getElementById('carousel-btn-left');
+    var btnRight = document.getElementById('carousel-btn-right');
+    var btnToggle = document.getElementById('carousel-btn-toggle');
+
+    function measureCarousel() {
+      loop1Width = track1.scrollWidth / LOOP_COPIES;
+      loop2Width = track2.scrollWidth / LOOP_COPIES;
+      if (!track1.dataset.initialized) {
+        track1X = 0;
+        // Start the second row offset within the same loop span so the two rows do not visually align.
+        track2X = -loop2Width / 2;
+        track1.dataset.initialized = 'true';
+      }
+      applyTrackPositions();
+    }
+
+    function wrapX(x, loopWidth) {
+      if (!loopWidth) return x;
+      x = x % loopWidth;
+      if (x > 0) x -= loopWidth;
+      return x;
+    }
+
+    function applyTrackPositions() {
+      track1X = wrapX(track1X, loop1Width || 1);
+      track2X = wrapX(track2X, loop2Width || 1);
+      track1.style.transform = 'translateX(' + track1X + 'px)';
+      track2.style.transform = 'translateX(' + track2X + 'px)';
+    }
+
+    function animateCarousel(ts) {
+      if (!lastTs) lastTs = ts;
+      var dt = (ts - lastTs) / 1000;
+      lastTs = ts;
+
+      if (autoplay) {
+        track1X += row1Dir * pxPerSecond * dt;
+        track2X -= row1Dir * pxPerSecond * dt;
+        applyTrackPositions();
+      }
+
+      rafId = requestAnimationFrame(animateCarousel);
+    }
+
+    function updateToggleButton() {
+      btnToggle.innerHTML = autoplay ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+      btnToggle.setAttribute('title', autoplay ? 'Pause autoplay' : 'Resume autoplay');
+      btnToggle.setAttribute('aria-label', autoplay ? 'Pause autoplay' : 'Resume autoplay');
+      btnToggle.classList.toggle('paused', autoplay);
+    }
+
+    function setDirection(nextDir) {
+      row1Dir = nextDir;
+    }
+
+    function nudge(direction) {
+      track1X += direction * stepAmount;
+      track2X -= direction * stepAmount;
+      applyTrackPositions();
+    }
+
+    btnToggle.addEventListener('click', function() {
+      autoplay = !autoplay;
+      updateToggleButton();
+    });
+
+    btnLeft.addEventListener('click', function() {
+      if (autoplay) {
+        setDirection(-1);
+      } else {
+        nudge(-1);
+      }
+    });
+
+    btnRight.addEventListener('click', function() {
+      if (autoplay) {
+        setDirection(1);
+      } else {
+        nudge(1);
+      }
+    });
+
+    /* Mobile swipe / drag support for Selected Works.
+       Taps still open cards; only a real horizontal drag suppresses the click.
+       A successful swipe also auto-pauses autoplay so the user stays in control. */
+    var carouselWrapper1 = document.getElementById('carousel-wrapper-1');
+    var carouselWrapper2 = document.getElementById('carousel-wrapper-2');
+    var suppressCarouselClickUntil = 0;
+
+    function moveTrackBy(rowNumber, deltaX) {
+      if (rowNumber === 1) {
+        track1X += deltaX;
+      } else {
+        track2X += deltaX;
+      }
+      applyTrackPositions();
+    }
+
+    function enableCarouselSwipe(wrapper, rowNumber) {
+      if (!wrapper) return;
+
+      var isPointerDown = false;
+      var isDragging = false;
+      var startX = 0;
+      var startY = 0;
+      var lastX = 0;
+
+      function stopListening() {
+        window.removeEventListener('pointermove', onPointerMove);
+        window.removeEventListener('pointerup', onPointerUp);
+        window.removeEventListener('pointercancel', onPointerUp);
+      }
+
+      function onPointerMove(e) {
+        if (!isPointerDown) return;
+
+        var totalX = e.clientX - startX;
+        var totalY = e.clientY - startY;
+
+        if (!isDragging) {
+          if (Math.abs(totalY) > 12 && Math.abs(totalY) > Math.abs(totalX)) {
+            isPointerDown = false;
+            stopListening();
+            return;
+          }
+
+          if (Math.abs(totalX) < 12 || Math.abs(totalX) < Math.abs(totalY) * 1.2) {
+            return;
+          }
+
+          isDragging = true;
+          if (autoplay) {
+            autoplay = false;
+            updateToggleButton();
+          }
+          wrapper.classList.add('is-dragging');
+        }
+
+        e.preventDefault();
+        moveTrackBy(rowNumber, e.clientX - lastX);
+        lastX = e.clientX;
+      }
+
+      function onPointerUp(e) {
+        if (!isPointerDown) return;
+
+        var totalX = e.clientX - startX;
+
+        if (isDragging) {
+          suppressCarouselClickUntil = Date.now() + 180;
+
+          // Keep autoplay moving in the same direction as the row the user just swiped.
+          if (rowNumber === 1) {
+            setDirection(totalX < 0 ? -1 : 1);
+          } else {
+            setDirection(totalX < 0 ? 1 : -1);
+          }
+
+          lastTs = 0;
+          updateToggleButton();
+        }
+
+        isPointerDown = false;
+        isDragging = false;
+        wrapper.classList.remove('is-dragging');
+        stopListening();
+      }
+
+      wrapper.addEventListener('pointerdown', function(e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+        isPointerDown = true;
+        isDragging = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        lastX = e.clientX;
+
+        window.addEventListener('pointermove', onPointerMove, { passive: false });
+        window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
+      });
+
+      wrapper.addEventListener('click', function(e) {
+        if (Date.now() >= suppressCarouselClickUntil) return;
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
+    }
+
+    enableCarouselSwipe(carouselWrapper1, 1);
+    enableCarouselSwipe(carouselWrapper2, 2);
+
+    window.addEventListener('resize', measureCarousel);
+
+    measureCarousel();
+    updateToggleButton();
+    rafId = requestAnimationFrame(animateCarousel);
+
+    /* ===========================
+       MODAL
+    =========================== */
+    var currentProject = null;
+    var currentImgIndex = 0;
+
+    function openModal(projectId) {
+      var project = projects.find(function(p) { return p.id === projectId; });
+      if (!project) return;
+      currentProject = project;
+      currentImgIndex = 0;
+
+      // Populate title + tag
+      document.getElementById('modal-title-el').textContent = project.title;
+      var tagEl = document.getElementById('modal-tag');
+      tagEl.textContent = project.tag;
+      tagEl.style.background = project.tagColor;
+
+      // Populate description
+      document.getElementById('modal-desc').textContent = project.description;
+
+      // Populate highlights
+      var listEl = document.getElementById('modal-highlights');
+      listEl.innerHTML = '';
+      project.highlights.forEach(function(h) {
+        var li = document.createElement('li');
+        li.textContent = h;
+        listEl.appendChild(li);
+      });
+
+      // Update media display
+      renderModalMedia(0);
+
+      // Build dots
+      var dotsEl = document.getElementById('modal-img-dots');
+      dotsEl.innerHTML = '';
+      project.images.forEach(function(_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'modal-img-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', function() { goToImage(i); });
+        dotsEl.appendChild(dot);
+      });
+
+      // Show modal
+      document.getElementById('modal-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Focus the modal for accessibility
+      setTimeout(function() { document.getElementById('modal-close').focus(); }, 50);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.remove('open');
+      document.body.style.overflow = '';
+      // Clear embedded media so third-party video playback stops when the modal closes.
+      var frame = document.getElementById('modal-media-frame');
+      if (frame) frame.innerHTML = '';
+    }
+
+    function getModalMediaAt(index) {
+      if (!currentProject || !currentProject.images) return null;
+      return currentProject.images[index];
+    }
+
+    function renderModalMedia(index) {
+      var media = getModalMediaAt(index);
+      var carousel = document.getElementById('modal-image-carousel');
+      var frame = document.getElementById('modal-media-frame');
+      if (!media || !carousel || !frame) return;
+
+      frame.innerHTML = '';
+      carousel.classList.remove('has-embed');
+      carousel.style.background = '#d9d8d6';
+
+      if (typeof media === 'object' && media.type === 'instagram') {
+        carousel.classList.add('has-embed');
+        carousel.style.background = '#ffffff';
+
+        var iframe = document.createElement('iframe');
+        iframe.className = 'modal-instagram-iframe';
+        iframe.src = media.embedUrl || media.url;
+        iframe.title = media.label || (currentProject.title + ' — Instagram Reel');
+        iframe.loading = 'lazy';
+        iframe.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        frame.appendChild(iframe);
+        return;
+      }
+
+      var img = document.createElement('img');
+      img.className = 'modal-image-display-media';
+      img.id = 'modal-image-display';
+      img.src = media;
+      img.alt = currentProject.title + ' — image ' + (index + 1);
+      img.loading = 'lazy';
+      frame.appendChild(img);
+    }
+
+    function goToImage(idx) {
+      if (!currentProject) return;
+      var count = currentProject.images.length;
+      currentImgIndex = ((idx % count) + count) % count;
+      renderModalMedia(currentImgIndex);
+      document.querySelectorAll('.modal-img-dot').forEach(function(dot, i) {
+        dot.classList.toggle('active', i === currentImgIndex);
+      });
+    }
+
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-backdrop').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.getElementById('modal-img-prev').addEventListener('click', function() { goToImage(currentImgIndex - 1); });
+    document.getElementById('modal-img-next').addEventListener('click', function() { goToImage(currentImgIndex + 1); });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeQualityModal();
+      }
+      if (document.getElementById('modal-backdrop').classList.contains('open')) {
+        if (e.key === 'ArrowLeft') goToImage(currentImgIndex - 1);
+        if (e.key === 'ArrowRight') goToImage(currentImgIndex + 1);
+      }
+    });
+
+
+    /* ===========================
+       QUALITY MODAL
+    =========================== */
+    var qualityContent = {
+      quality1: {
+        title: 'Committed',
+        copy: 'I stay committed to seeing ideas through with care, consistency, and follow-through, from early concepting to final execution.'
+      },
+      quality2: {
+        title: 'Creative',
+        copy: 'I enjoy turning rough ideas into thoughtful visual solutions, exploring different directions until something feels both clear and original.'
+      },
+      quality3: {
+        title: 'Curious',
+        copy: 'I am naturally curious, always asking questions, learning new tools, and looking deeper so the work is not only polished, but meaningful.'
+      }
+    };
+
+    var qualityModalBackdrop = document.getElementById('quality-modal-backdrop');
+    var qualityModalClose = document.getElementById('quality-modal-close');
+    var qualityModalTitle = document.getElementById('quality-modal-title');
+    var qualityModalCopy = document.getElementById('quality-modal-copy');
+    var qualityTriggers = document.querySelectorAll('.quality-trigger');
+
+    function openQualityModal(key) {
+      var item = qualityContent[key];
+      if (!item) return;
+      qualityModalTitle.textContent = item.title;
+      qualityModalCopy.textContent = item.copy;
+      qualityModalBackdrop.classList.add('open');
+      qualityModalBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() { qualityModalClose.focus(); }, 50);
+    }
+
+    function closeQualityModal() {
+      qualityModalBackdrop.classList.remove('open');
+      qualityModalBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    qualityTriggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        openQualityModal(trigger.getAttribute('data-quality'));
+      });
+    });
+
+    qualityModalClose.addEventListener('click', closeQualityModal);
+    qualityModalBackdrop.addEventListener('click', function(e) {
+      if (e.target === this) closeQualityModal();
+    });
+
+
+    /* ===========================
+       NAVBAR ACTIVE STATE
+       (scroll position + offset clicks)
+    =========================== */
+    var navCluster = document.querySelector('.nav-cluster');
+    var navbar = document.getElementById('navbar');
+    var navLinks = document.querySelectorAll('.nav-link');
+    var pageSections = document.querySelectorAll('section[id]');
+    var homeSection = document.getElementById('home');
+
+    function isMobileNavMode() {
+      return window.matchMedia('(max-width: 600px)').matches;
+    }
+
+    function syncMobileNavDock() {
+      if (!navCluster) return;
+
+      var navHeight = Math.ceil(navCluster.getBoundingClientRect().height || 52);
+      navCluster.style.setProperty('--mobile-nav-height', navHeight + 'px');
+
+      if (!isMobileNavMode() || !homeSection) {
+        navCluster.classList.remove('mobile-bottom-docked');
+        return;
+      }
+
+      var homeBottom = homeSection.offsetTop + homeSection.offsetHeight;
+      var threshold = homeBottom - navHeight - 24;
+      navCluster.classList.toggle('mobile-bottom-docked', window.scrollY > threshold);
+    }
+
+    function updateNavbarState() {
+      navbar.classList.toggle('scrolled', window.scrollY > 24);
+      if (navCluster) navCluster.classList.toggle('scrolled', window.scrollY > 24);
+      syncMobileNavDock();
+
+      var probe = window.innerHeight * 0.28 + 96;
+      var bestId = 'home';
+      var bestDistance = Infinity;
+
+      pageSections.forEach(function(section) {
+        var rect = section.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var distance = Math.abs(center - probe);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestId = section.id;
+        }
+      });
+
+      navLinks.forEach(function(link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + bestId);
+      });
+    }
+
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        var target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        var navHeight = navCluster ? Math.ceil(navCluster.getBoundingClientRect().height || 56) : 56;
+        var navIsBottomDocked = navCluster && navCluster.classList.contains('mobile-bottom-docked');
+        var offset = navIsBottomDocked ? 24 : navHeight + 32;
+        var y = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('scroll', updateNavbarState, { passive: true });
+    window.addEventListener('resize', updateNavbarState);
+    window.addEventListener('load', updateNavbarState);
+    updateNavbarState();
+
+    /* ===========================
+       SCROLL ANIMATIONS
+       (IntersectionObserver)
+    =========================== */
+    var scrollObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
+      scrollObserver.observe(el);
+    });
+
+    /* ===========================
+       PROFILE TRIPTYCH
+       Trigger SVG composition animations on scroll-in;
+       replay on hover/focus (desktop only, respects reduced motion).
+    =========================== */
+    (function() {
+      var cards = document.querySelectorAll('.profile-card');
+      if (!cards.length) return;
+
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Reveal animation on first scroll-in
+      var cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Stagger across the three cards for a more deliberate entrance
+            var idx = Array.prototype.indexOf.call(cards, entry.target);
+            var delay = prefersReduced ? 0 : idx * 140;
+            setTimeout(function() {
+              entry.target.classList.add('is-visible');
+            }, delay);
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+
+      cards.forEach(function(card) {
+        cardObserver.observe(card);
+      });
+
+      // Replay on hover/focus — desktop with hover only, never when reduced motion
+      if (prefersReduced) return;
+      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canHover) return;
+
+      cards.forEach(function(card) {
+        var replay = function() {
+          if (!card.classList.contains('is-visible')) return;
+          card.classList.remove('is-visible');
+          // Force a browser reflow so the keyframe animations restart from frame 0
+          void card.offsetWidth;
+          card.classList.add('is-visible');
+        };
+        card.addEventListener('mouseenter', replay);
+        card.addEventListener('focus', replay);
+      });
+    })();
+  </script>
+</body>
+</html>
