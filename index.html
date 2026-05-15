@@ -780,7 +780,10 @@
     }
 
     .edu-card-image {
-      --edu-image-inset: 18px;
+      /* Keep education artwork fully visible. The x/y inset preserves a wide banner feel
+         without forcing 2:1 artwork into a cropped cover frame. */
+      --edu-image-inset-x: 18px;
+      --edu-image-inset-y: 9px;
       position: relative;
       overflow: hidden;
       width: 100%;
@@ -804,7 +807,7 @@
 
     .edu-card-image-frame {
       position: absolute;
-      inset: var(--edu-image-inset);
+      inset: var(--edu-image-inset-y) var(--edu-image-inset-x);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -815,7 +818,7 @@
     .edu-card-image-frame img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
     }
@@ -1723,7 +1726,7 @@
       .profile-card-art { aspect-ratio: 16 / 10; max-height: 160px; margin-top: 0; }
       .profile-card-caption { margin-top: 18px; }
       .edu-card { border-radius: 18px; }
-      .edu-card-image { --edu-image-inset: 12px; min-height: 140px; max-height: 170px; padding: 0; }
+      .edu-card-image { --edu-image-inset-x: 12px; --edu-image-inset-y: 6px; min-height: 140px; max-height: 170px; padding: 0; }
       .edu-card-body { padding: 16px 16px 18px; }
       .edu-uni { font-size: 0.92rem; line-height: 1.3; margin-bottom: 5px; }
       .edu-degree { font-size: 0.76rem; line-height: 1.4; margin-bottom: 10px; }
