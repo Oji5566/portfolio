@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kevin Ab — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Radley:ital@0;1&display=swap" rel="stylesheet">
+<title>Kevin Ab — Creative Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Radley:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* ===========================
@@ -53,6 +53,7 @@
       --wide-content-max: 1360px;
       --page-gutter: clamp(20px, 5vw, 80px);
       --section-block: clamp(72px, 8vw, 100px);
+      --section-block-after: clamp(57.6px, 6.4vw, 80px);
       --section-heading-size: clamp(2.55rem, 4.1vw, 3.7rem);
       --section-heading-gap: clamp(44px, 5vw, 62px);
       --grid-gap: clamp(18px, 2.6vw, 32px);
@@ -142,6 +143,13 @@
       position: relative;
       padding: var(--section-block) var(--page-gutter);
       scroll-margin-top: var(--nav-offset);
+    }
+
+    #profile,
+    #education,
+    #works,
+    #skills {
+      padding-bottom: var(--section-block-after);
     }
 
     .section-heading {
@@ -532,315 +540,268 @@
     }
 
     /* ---------------------------
-       PROFILE — Concept 5: Index Card Wall / Mood Board
-       Three "paper" index cards on a beige desk surface, slightly
-       rotated and connected by a faint thread. Each card carries an
-       adjective in big Radley italic, a polaroid-style painterly
-       thumbnail "taped" on, a small stamp, and a handwritten-feeling
-       description. Rotation lives on outer wrappers only so inner
-       content (text + button semantics) stays accessible.
+       PROFILE — Concept 5 pinboard
+       (index card wall for the About Me section)
     --------------------------- */
     .profile-shell {
       max-width: var(--content-max);
       margin: 0 auto;
     }
 
-    .moodboard {
+    .pinboard {
+      --profile-orange: #f39a45;
+      --profile-cyan: #4cc7e8;
+      --profile-green: #7fb53b;
+      --profile-muted: #66645f;
+      --profile-ease: cubic-bezier(0.65, 0, 0.35, 1);
+      --profile-shadow-lift: 0 30px 80px rgba(0,0,0,0.14);
       position: relative;
-      padding: clamp(48px, 6vw, 88px) clamp(20px, 3vw, 56px) clamp(56px, 7vw, 96px);
-      border-radius: 22px;
-      border: 1px solid rgba(120, 92, 52, 0.14);
-      background-color: #ece3cf;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.34 0 0 0 0 0.26 0 0 0 0 0.16 0 0 0 0.12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-        radial-gradient(120% 80% at 28% 18%, #f4ead0 0%, #ece3cf 52%, #ddd1b3 100%);
-      background-size: 320px 320px, 100% 100%;
-      box-shadow:
-        inset 0 0 80px rgba(120, 88, 36, 0.10),
-        inset 0 1px 0 rgba(255, 248, 230, 0.6),
-        0 18px 48px rgba(80, 56, 24, 0.10);
-      overflow: hidden;
-    }
-
-    /* Desk surface activators (coffee ring, paperclip, date stamp, thread) */
-    .moodboard-desk {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .desk-coffee-ring {
-      position: absolute;
-      bottom: 9%;
-      left: 4%;
-      width: clamp(110px, 13vw, 180px);
-      height: clamp(110px, 13vw, 180px);
-      border-radius: 50%;
-      border: 5px solid rgba(120, 70, 30, 0.10);
-      box-shadow:
-        inset 0 0 0 2px rgba(120, 70, 30, 0.05),
-        0 0 24px rgba(120, 70, 30, 0.03);
-      transform: rotate(-12deg);
-      filter: blur(0.4px);
-      opacity: 0.7;
-    }
-
-    .desk-stamp {
-      position: absolute;
-      bottom: clamp(20px, 3vw, 36px);
-      right: clamp(24px, 4vw, 56px);
-      font-family: 'Radley', serif;
-      font-style: italic;
-      font-size: clamp(0.85rem, 1.1vw, 1rem);
-      letter-spacing: 0.08em;
-      color: rgba(120, 70, 30, 0.6);
-      padding: 6px 12px;
-      border: 1.5px solid rgba(120, 70, 30, 0.45);
-      border-radius: 4px;
-      transform: rotate(-6deg);
-      text-transform: lowercase;
-      opacity: 0.85;
-    }
-
-    .desk-paperclip {
-      position: absolute;
-      top: clamp(18px, 2.5vw, 32px);
-      right: clamp(34px, 5vw, 80px);
-      width: 30px;
-      height: 60px;
-      transform: rotate(18deg);
-      opacity: 0.5;
-    }
-
-    .desk-paperclip svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      overflow: visible;
-    }
-
-    .desk-paperclip svg path {
-      fill: none;
-      stroke: #6f6f6c;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* Faint thread connecting the three cards */
-    .desk-thread {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .desk-thread .thread-line {
-      fill: none;
-      stroke: rgba(120, 70, 30, 0.35);
-      stroke-width: 1.2;
-      stroke-linecap: round;
-      stroke-dasharray: 2 5;
-      opacity: 0.55;
-    }
-
-    /* Card grid */
-    .moodboard-grid {
-      position: relative;
-      z-index: 4;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(18px, 2.4vw, 36px);
+      gap: clamp(34px, 5vw, 72px);
       align-items: start;
-    }
-
-    /* Outer wrapper — only this is rotated; inner card content stays
-       in normal flow so screen readers and focus order are unaffected. */
-    .card-wrap {
-      --rot: 0deg;
-      --lift: 0px;
-      position: relative;
-      display: block;
-      padding: 0;
-      border: 0;
+      padding: clamp(22px, 3vw, 38px) 0 86px;
       background: transparent;
-      font: inherit;
-      color: inherit;
-      text-align: left;
-      cursor: pointer;
-      transform: rotate(var(--rot)) translateY(var(--lift));
-      transform-origin: 50% 60%;
-      transition:
-        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
-        filter 0.45s ease;
-      filter:
-        drop-shadow(0 14px 26px rgba(70, 46, 16, 0.18))
-        drop-shadow(0 3px 6px rgba(70, 46, 16, 0.10));
+      overflow: visible;
+      isolation: isolate;
     }
 
-    .card-wrap-1 { --rot: -3deg; margin-top: clamp(6px, 1.2vw, 18px); z-index: 2; }
-    .card-wrap-2 { --rot:  2deg; margin-top: clamp(28px, 4vw, 56px); z-index: 5; } /* pinned slightly above */
-    .card-wrap-3 { --rot: -1deg; margin-top: clamp(10px, 1.8vw, 26px); z-index: 3; }
-
-    .card-wrap:hover,
-    .card-wrap:focus-visible {
-      --lift: -6px;
-      filter:
-        drop-shadow(0 22px 36px rgba(70, 46, 16, 0.24))
-        drop-shadow(0 6px 10px rgba(70, 46, 16, 0.12));
-      outline: none;
+    .pin-thread {
+      position: absolute;
+      left: 5%;
+      top: 33%;
+      width: 90%;
+      height: 36%;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .card-wrap:focus-visible .index-card {
-      box-shadow:
-        inset 0 0 0 2px rgba(0, 0, 0, 0.28),
-        inset 0 0 0 4px rgba(255, 255, 255, 0.5);
+    .pin-thread path {
+      fill: none;
+      stroke: rgba(17,17,17,0.14);
+      stroke-width: 1.2;
+      stroke-dasharray: 5 7;
     }
 
-    /* The card itself (paper) */
     .index-card {
+      --accent: var(--profile-orange);
+      --accent-ink: #bd6927;
+      --accent-border: rgba(243,154,69,0.58);
+      --card-rotate: 0deg;
+      --card-y: 0px;
+      appearance: none;
+      -webkit-appearance: none;
       position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        "stamp   thumb"
-        "quality thumb"
-        "desc    desc";
-      gap: 12px 18px;
-      padding: 22px 22px 30px;
-      min-height: 280px;
-      border-radius: 3px 3px 0 0;
-      border: 1px solid rgba(70, 46, 16, 0.08);
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.55),
-        inset 0 -22px 32px rgba(70, 46, 16, 0.05);
-      /* Torn / deckled bottom edge */
-      clip-path: polygon(
-        0 0, 100% 0,
-        100% calc(100% - 6px), 95% 100%, 90% calc(100% - 4px),
-        82% calc(100% - 1px), 76% calc(100% - 6px), 70% calc(100% - 2px),
-        62% calc(100% - 5px), 55% 100%, 48% calc(100% - 3px),
-        40% calc(100% - 7px), 33% calc(100% - 1px), 26% calc(100% - 5px),
-        18% 100%, 12% calc(100% - 3px), 6% calc(100% - 6px),
-        0 calc(100% - 4px)
-      );
+      z-index: 1;
+      width: 100%;
+      min-height: 282px;
+      padding: clamp(25px, 2.7vw, 32px) clamp(24px, 2.7vw, 30px) clamp(25px, 2.7vw, 30px);
+      border: 0;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.76)),
+        repeating-linear-gradient(0deg, transparent 0 35px, rgba(17,17,17,0.055) 36px 37px);
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.11), inset 0 1px 0 rgba(255,255,255,0.9);
+      transform: translateY(var(--card-y)) rotate(var(--card-rotate));
+      transition: transform 0.6s var(--profile-ease), box-shadow 0.6s var(--profile-ease);
     }
 
-    /* Color tinting per card — one warm, one cool, one neutral, all
-       drawn from the warm/painterly palette of the hero/edu artwork. */
-    .index-card--neutral {
-      background-color: #f4ebd2;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.30 0 0 0 0 0.22 0 0 0 0 0.10 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-        linear-gradient(160deg, #fdf6dc 0%, #f0e5c4 100%);
-      background-size: 220px 220px, 100% 100%;
+    .index-card:hover,
+    .index-card:focus-visible {
+      transform: translateY(calc(var(--card-y) - 10px)) rotate(0deg);
+      box-shadow: var(--profile-shadow-lift);
     }
 
-    .index-card--warm {
-      background-color: #f7d6ad;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.34 0 0 0 0 0.20 0 0 0 0 0.08 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-        linear-gradient(160deg, #fde2bf 0%, #f1bf85 100%);
-      background-size: 220px 220px, 100% 100%;
+    .index-card:focus-visible {
+      outline: 2px solid rgba(0,0,0,0.26);
+      outline-offset: 8px;
     }
 
-    .index-card--cool {
-      background-color: #d6e6ec;
-      background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.26 0 0 0 0 0.30 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
-        linear-gradient(160deg, #e8f1f4 0%, #c5dde6 100%);
-      background-size: 220px 220px, 100% 100%;
+    .index-card.card-a {
+      --card-rotate: -3.5deg;
+      --card-y: 18px;
+      --accent: var(--profile-green);
+      --accent-ink: #5f8d25;
+      --accent-border: rgba(127,181,59,0.58);
+    }
+
+    .index-card.card-b {
+      --card-rotate: 2.4deg;
+      --card-y: 86px;
+      --accent: var(--profile-orange);
+      --accent-ink: #bd6927;
+      --accent-border: rgba(243,154,69,0.58);
+    }
+
+    .index-card.card-c {
+      --card-rotate: -1.5deg;
+      --card-y: 8px;
+      --accent: var(--profile-cyan);
+      --accent-ink: #258ca7;
+      --accent-border: rgba(76,199,232,0.58);
+    }
+
+    .tape {
+      position: absolute;
+      left: 50%;
+      top: -14px;
+      width: 94px;
+      height: 30px;
+      transform: translateX(-50%) rotate(-2deg);
+      border-radius: 5px;
+      background: rgba(255,255,255,0.48);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.36);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      pointer-events: none;
     }
 
     .card-stamp {
-      grid-area: stamp;
-      align-self: start;
-      justify-self: start;
-      font-family: 'Radley', serif;
-      font-style: italic;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      padding: 6px 9px;
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      color: var(--accent-ink);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(120, 70, 30, 0.62);
-      border: 1.2px solid rgba(120, 70, 30, 0.5);
-      padding: 4px 9px 3px;
-      border-radius: 3px;
-      transform: rotate(-3deg);
-      background: rgba(255, 255, 255, 0.18);
-      white-space: nowrap;
+      transform: rotate(4deg);
     }
 
-    .card-quality {
-      grid-area: quality;
+    .card-word {
+      margin: 46px 0 20px;
       font-family: 'Radley', serif;
+      font-size: clamp(2.65rem, 3.8vw, 4.05rem);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(2rem, 2.9vw, 2.6rem);
-      line-height: 0.98;
-      letter-spacing: -0.01em;
-      color: #2b2118;
-      align-self: start;
-      margin-top: 4px;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
     }
 
-    .card-thumb {
-      grid-area: thumb;
-      position: relative;
-      width: clamp(96px, 11vw, 124px);
-      background: #fffdf6;
-      padding: 8px 8px 22px;
-      border-radius: 2px;
-      box-shadow:
-        0 6px 14px rgba(70, 46, 16, 0.18),
-        0 1px 2px rgba(70, 46, 16, 0.10);
-      transform: rotate(4deg);
-      align-self: start;
-      justify-self: end;
-      margin-top: 6px;
+    .card-copy {
+      margin: 0;
+      color: var(--profile-muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
     }
 
-    .card-thumb img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      height: auto;
-      object-fit: cover;
-      object-position: 50% 35%;
-      display: block;
-      border-radius: 1px;
-    }
-
-    .card-thumb-tape {
+    .hand-note {
       position: absolute;
-      top: -10px;
-      left: 50%;
-      width: 64px;
-      height: 22px;
-      transform: translateX(-50%) rotate(-5deg);
-      background: linear-gradient(180deg, rgba(255, 239, 180, 0.6), rgba(255, 224, 140, 0.45));
-      border-left: 1px dashed rgba(255, 255, 255, 0.4);
-      border-right: 1px dashed rgba(255, 255, 255, 0.4);
-      box-shadow: 0 1px 2px rgba(70, 46, 16, 0.10);
+      right: 26px;
+      bottom: 14px;
+      color: var(--accent-ink);
+      font-family: 'Caveat', 'Comic Sans MS', cursive;
+      font-size: 1.36rem;
+      font-weight: 600;
+      transform: rotate(-6deg);
     }
 
-    .card-desc {
-      grid-area: desc;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: #2b2118;
-      letter-spacing: 0.005em;
-      margin-top: 8px;
+    @media (min-width: 981px) {
+      .card-word { font-size: clamp(2.39rem, 3.42vw, 3.65rem); }
     }
 
-    /* Reduced motion: keep static layout, no card lift on hover */
+    @media (max-width: 980px) {
+      .pinboard {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 10px 0 0;
+      }
+
+      .pin-thread {
+        display: none;
+      }
+
+      .index-card {
+        width: min(90%, 558px);
+        min-height: 214px;
+        margin: 0 auto;
+        padding: 23px 22px 23px;
+        border-radius: 20px;
+        box-shadow: 0 8px 22px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+        transform: rotate(var(--card-rotate));
+      }
+
+      .index-card:hover,
+      .index-card:focus-visible {
+        transform: translateY(-7px) rotate(0deg);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+      }
+
+      .tape {
+        top: -13px;
+        width: 85px;
+        height: 27px;
+        border-radius: 5px;
+      }
+
+      .card-stamp {
+        right: 16px;
+        top: 16px;
+        padding: 5px 8px;
+        font-size: 0.59rem;
+      }
+
+      .card-word {
+        margin: 41px 0 18px;
+        font-size: clamp(2.39rem, 3.42vw, 3.65rem);
+      }
+
+      .card-copy {
+        font-size: 0.88rem;
+      }
+
+      .hand-note {
+        right: 23px;
+        bottom: 13px;
+        font-size: 1.22rem;
+      }
+
+      .index-card.card-a { --card-rotate: -1.4deg; --card-y: 0px; }
+      .index-card.card-b { --card-rotate: 1.2deg; --card-y: 0px; }
+      .index-card.card-c { --card-rotate: -1deg; --card-y: 0px; }
+    }
+
+    @media (max-width: 600px) {
+      .pinboard {
+        gap: 35px;
+      }
+
+      .index-card {
+        min-height: 202px;
+        padding: 22px 19px 20px;
+        border-radius: 16px;
+      }
+
+      .card-word {
+        margin-top: 38px;
+        font-size: clamp(2.39rem, 12.6vw, 3.15rem);
+      }
+
+      .card-copy {
+        font-size: 0.83rem;
+      }
+
+      .hand-note {
+        right: 20px;
+        bottom: 12px;
+        font-size: 1.10rem;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .card-wrap { transition: none; }
-      .card-wrap:hover, .card-wrap:focus-visible { --lift: 0px; }
+      .index-card,
+      .index-card:hover,
+      .index-card:focus-visible {
+        transition: none !important;
+      }
     }
-
 
     /* ===========================
        EDUCATION SECTION
@@ -1213,7 +1174,6 @@
     #skills {
       background: #f7f7f5;
       padding-top: 90px;
-      padding-bottom: 120px;
     }
 
     #skills .section-heading::after {
@@ -1750,6 +1710,7 @@
       :root {
         --page-gutter: clamp(28px, 4.4vw, 48px);
         --section-block: 80px;
+        --section-block-after: 64px;
         --grid-gap: clamp(22px, 2.4vw, 28px);
       }
       #works .section-heading { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
@@ -1760,6 +1721,7 @@
       :root {
         --page-gutter: 28px;
         --section-block: 80px;
+        --section-block-after: 64px;
       }
       #home { padding-top: 138px; padding-bottom: 84px; }
       #works .section-heading { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
@@ -1770,30 +1732,6 @@
       .about-subheading { margin: 0 auto; }
       .profile-placeholder { width: 250px; height: 333px; margin: 0 auto; }
 
-      /* Tablet: 2 cards on top, 1 card centered below; rotations softened. */
-      .moodboard {
-        padding: clamp(40px, 6vw, 64px) clamp(20px, 3vw, 36px) clamp(48px, 7vw, 72px);
-      }
-      .moodboard-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-          "c1 c2"
-          "c3 c3";
-        gap: clamp(18px, 2.6vw, 28px) clamp(18px, 2.6vw, 28px);
-        max-width: min(640px, calc(100vw - (var(--page-gutter) * 2)));
-        margin: 0 auto;
-      }
-      .card-wrap-1 { grid-area: c1; --rot: -1.5deg; margin-top: 0; }
-      .card-wrap-2 { grid-area: c2; --rot:  1.2deg; margin-top: 14px; }
-      .card-wrap-3 {
-        grid-area: c3;
-        --rot: -0.8deg;
-        margin-top: 22px;
-        max-width: 78%;
-        justify-self: center;
-        width: 100%;
-      }
-      .desk-thread { display: none; }
 
       .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 29px; }
     }
@@ -1802,6 +1740,7 @@
       :root {
         --page-gutter: 20px;
         --section-block: 72px;
+        --section-block-after: 57.6px;
         --nav-offset: 76px;
       }
 
@@ -1825,65 +1764,6 @@
       .education-grid {
         max-width: min(360px, calc(100vw - (var(--page-gutter) * 2)));
         gap: 17px;
-      }
-      /* Mobile: cards stack vertically; rotations near 0; tape relocated to top edge. */
-      .moodboard {
-        padding: 36px 18px 56px;
-        border-radius: 18px;
-      }
-      .moodboard-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas: none;
-        gap: 32px;
-        max-width: min(380px, calc(100vw - (var(--page-gutter) * 2)));
-        margin: 0 auto;
-      }
-      .card-wrap-1,
-      .card-wrap-2,
-      .card-wrap-3 {
-        grid-area: auto;
-        --rot: 0deg;
-        margin-top: 0;
-        max-width: 100%;
-        width: 100%;
-        justify-self: stretch;
-      }
-      .card-wrap-1 { --rot: -0.6deg; }
-      .card-wrap-2 { --rot:  0.6deg; }
-      .card-wrap-3 { --rot: -0.4deg; }
-
-      /* Polaroid moves to the top of the card; tape pins it to the
-         card's top edge so nothing crops awkwardly. */
-      .index-card {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "thumb"
-          "stamp"
-          "quality"
-          "desc";
-        gap: 12px;
-        padding: 44px 20px 30px;
-        min-height: 0;
-      }
-      .card-thumb {
-        justify-self: center;
-        margin-top: -32px;
-        transform: rotate(-2deg);
-        width: clamp(120px, 36vw, 150px);
-      }
-      .card-thumb-tape {
-        top: -14px;
-        width: 88px;
-        height: 24px;
-      }
-      .card-stamp { justify-self: start; }
-      .card-quality { font-size: clamp(2rem, 8vw, 2.4rem); margin-top: 2px; }
-      .desk-paperclip,
-      .desk-coffee-ring { display: none; }
-      .desk-stamp {
-        bottom: 14px;
-        right: 18px;
-        font-size: 0.78rem;
       }
       .edu-card { border-radius: 18px; }
       .edu-card-image { --edu-image-inset-x: 12px; --edu-image-inset-y: 6px; min-height: 140px; max-height: 170px; padding: 0; }
@@ -1913,10 +1793,10 @@
   <div class="nav-cluster">
 <nav class="navbar" id="navbar">
     <a class="nav-link active" href="#home">Home</a>
-    <a class="nav-link" href="#profile">Profile</a>
+    <a class="nav-link" href="#profile">About</a>
     <a class="nav-link" href="#education">Education</a>
     <a class="nav-link" href="#works">Selected Works</a>
-    <a class="nav-link" href="#skills">Skills &amp; Tools</a>
+    <a class="nav-link" href="#skills">Tools</a>
     <a class="nav-link" href="#contact">Contact</a>
   </nav>
   </div>
@@ -1933,8 +1813,8 @@
           </div>
         </div>
         <div class="about-content-col">
-          <h1 class="about-greeting"><span class="hello-italic">Hello,</span><br>my name is<br>Kevin Ab!</h1>
-          <p class="about-subheading">I create thoughtful, emotionally resonant visual experiences across brand, digital, and storytelling systems.</p>
+          <h1 class="about-greeting"><span class="hello-italic">Hello,</span><br>I’m Kevin Ab.</h1>
+          <p class="about-subheading">I create clear, thoughtful visual content for social campaigns, events, and digital storytelling.</p>
         </div>
       </div>
     </div>
@@ -1945,66 +1825,36 @@
   =========================== -->
 
   <section id="profile">
-    <h2 class="section-heading animate-on-scroll">A little bit about me</h2>
+    <h2 class="section-heading animate-on-scroll">About me</h2>
     <div class="profile-shell">
-      <div class="moodboard animate-on-scroll">
+      <div class="pinboard animate-on-scroll" aria-label="About me qualities pinboard">
+        <svg class="pin-thread" viewBox="0 0 900 460" aria-hidden="true" focusable="false">
+          <path d="M78 190 C240 78, 410 290, 540 164 C650 58, 740 100, 825 212" />
+        </svg>
 
-        <!-- Desk surface activators -->
-        <div class="moodboard-desk" aria-hidden="true">
-          <div class="desk-coffee-ring"></div>
-          <div class="desk-paperclip">
-            <svg viewBox="0 0 30 60" focusable="false">
-              <path d="M9 8 Q9 2 15 2 Q21 2 21 8 L21 46 Q21 54 14 54 Q7 54 7 46 L7 14 Q7 8 13 8 L17 8 Q22 8 22 14 L22 42"/>
-            </svg>
-          </div>
-          <div class="desk-stamp">est. 2025</div>
-          <svg class="desk-thread" viewBox="0 0 1000 500" preserveAspectRatio="none" focusable="false" aria-hidden="true">
-            <path class="thread-line" d="M 160 220 C 320 110, 460 300, 540 240 S 760 140, 860 300"/>
-          </svg>
-        </div>
+        <button class="index-card card-a quality-trigger" type="button" data-quality="quality1" aria-label="Read more about Committed">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="card-stamp">WHO</span>
+          <h3 class="card-word">Committed</h3>
+          <p class="card-copy">I follow projects through from the first rough idea to a polished final result.</p>
+          <span class="hand-note">finish well</span>
+        </button>
 
-        <div class="moodboard-grid">
+        <button class="index-card card-b quality-trigger" type="button" data-quality="quality2" aria-label="Read more about Creative">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="card-stamp">HOW</span>
+          <h3 class="card-word">Creative</h3>
+          <p class="card-copy">I turn ideas into visuals that feel clear, expressive, and memorable.</p>
+          <span class="hand-note">find the angle</span>
+        </button>
 
-          <!-- Card 1 — Committed (neutral) -->
-          <button class="card-wrap card-wrap-1 quality-trigger" type="button" data-quality="quality1" aria-label="Committed">
-            <span class="index-card index-card--neutral">
-              <span class="card-stamp" aria-hidden="true">No. 01</span>
-              <span class="card-thumb" aria-hidden="true">
-                <span class="card-thumb-tape"></span>
-                <img src="edu1.png" alt="" loading="lazy" decoding="async">
-              </span>
-              <span class="card-quality">Committed</span>
-              <span class="card-desc">Seeing ideas through with care, consistency, and follow-through &mdash; from early concepting to final execution.</span>
-            </span>
-          </button>
-
-          <!-- Card 2 — Creative (warm) -->
-          <button class="card-wrap card-wrap-2 quality-trigger" type="button" data-quality="quality2" aria-label="Creative">
-            <span class="index-card index-card--warm">
-              <span class="card-stamp" aria-hidden="true">No. 02</span>
-              <span class="card-thumb" aria-hidden="true">
-                <span class="card-thumb-tape"></span>
-                <img src="hero.png" alt="" loading="lazy" decoding="async">
-              </span>
-              <span class="card-quality">Creative</span>
-              <span class="card-desc">Turning rough ideas into thoughtful visual solutions, exploring directions until something feels both clear and original.</span>
-            </span>
-          </button>
-
-          <!-- Card 3 — Curious (cool) -->
-          <button class="card-wrap card-wrap-3 quality-trigger" type="button" data-quality="quality3" aria-label="Curious">
-            <span class="index-card index-card--cool">
-              <span class="card-stamp" aria-hidden="true">No. 03</span>
-              <span class="card-thumb" aria-hidden="true">
-                <span class="card-thumb-tape"></span>
-                <img src="edu2.png" alt="" loading="lazy" decoding="async">
-              </span>
-              <span class="card-quality">Curious</span>
-              <span class="card-desc">Always asking questions, learning new tools, and looking deeper so the work is not only polished, but meaningful.</span>
-            </span>
-          </button>
-
-        </div>
+        <button class="index-card card-c quality-trigger" type="button" data-quality="quality3" aria-label="Read more about Curious">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="card-stamp">WHY</span>
+          <h3 class="card-word">Curious</h3>
+          <p class="card-copy">I ask questions, test ideas, and learn new tools to make the work stronger.</p>
+          <span class="hand-note">keep learning</span>
+        </button>
       </div>
     </div>
   </section>
@@ -2019,10 +1869,10 @@
         </div>
         <div class="edu-card-body">
           <div class="edu-uni">Durham University</div>
-          <div class="edu-degree">Exchange Student, Department of Management &amp; Marketing</div>
+          <div class="edu-degree">Exchange Student, Management &amp; Marketing</div>
           <ul class="edu-points">
-            <li>Achieved a distinction-level average across coursework</li>
-            <li>Marketing Officer for PalTV, Durham&rsquo;s award-winning student TV station</li>
+            <li>Earned a distinction-level average across coursework</li>
+            <li>Served as Marketing Officer for PalTV, Durham&rsquo;s award-winning student TV station</li>
           </ul>
         </div>
       </div>
@@ -2034,8 +1884,8 @@
           <div class="edu-uni">National Sun Yat-sen University</div>
           <div class="edu-degree">Master of Business Administration in International Business</div>
           <ul class="edu-points">
-            <li>GPA: 4.21 / 4.3</li>
-            <li>Winner of Hult Prize OnCampus at NSYSU 2024</li>
+            <li>Maintained a 4.21 / 4.3 GPA</li>
+            <li>Collaborated on the winning Hult Prize OnCampus 2024 pitch</li>
           </ul>
         </div>
       </div>
@@ -2047,10 +1897,10 @@
           <div class="edu-uni">National Pingtung University</div>
           <div class="edu-degree">Bachelor of Arts, English</div>
           <ul class="edu-points">
-            <li>GPA: 4.0 / 4.0; graduated first in class</li>
-            <li>Eight-time Academic Achievement Award recipient</li>
+            <li>Graduated first in class with a 4.0 / 4.0 GPA</li>
+            <li>Earned academic achievement honors eight times</li>
             <li>Co-wrote and performed in an original stage production</li>
-            <li>Trained Teacher of Chinese as a Foreign Language</li>
+            <li>Qualified through TCFL training for Chinese language instruction</li>
           </ul>
         </div>
       </div>
@@ -2101,7 +1951,7 @@
       <div class="skill-icon skill-m365"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon6.png" alt="Microsoft 365 app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title" >Microsoft 365 (Office)</div><div class="skill-icon-meta">Productivity suite</div></div></div>
       <div class="skill-icon skill-meta"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon7.png" alt="Meta Business Suite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Meta Business Suite</div><div class="skill-icon-meta">Social media management</div></div></div>
       <div class="skill-icon skill-hootsuite"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon8.png" alt="Hootsuite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Hootsuite</div><div class="skill-icon-meta">Social media analytics</div></div></div>
-      <div class="skill-icon skill-github"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon9.png" alt="GitHub app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">GitHub</div><div class="skill-icon-meta">Vibecoding and hosting</div></div></div>
+      <div class="skill-icon skill-github"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon9.png" alt="GitHub app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">GitHub</div><div class="skill-icon-meta">Prompt-driven coding &amp; hosting</div></div></div>
       <div class="skill-icon skill-davinci"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon10.png" alt="DaVinci Resolve app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">DaVinci Resolve</div><div class="skill-icon-meta">Video editing</div></div></div>
     </div>
   </section>
@@ -2133,7 +1983,7 @@
       <button class="quality-modal-close" id="quality-modal-close" aria-label="Close quality details">
         <i class="fas fa-times"></i>
       </button>
-      <h3 class="quality-modal-title" id="quality-modal-title">Quality</h3>
+      <h3 class="quality-modal-title" id="quality-modal-title">Core quality</h3>
       <p class="quality-modal-copy" id="quality-modal-copy"></p>
     </div>
   </div>
@@ -2163,7 +2013,7 @@
         <h2 class="modal-title" id="modal-title-el"></h2>
         <span class="modal-tag" id="modal-tag"></span>
         <p class="modal-desc" id="modal-desc"></p>
-        <h3 class="modal-highlights-heading">Key Highlights</h3>
+        <h3 class="modal-highlights-heading">Key highlights</h3>
         <ul class="modal-highlights-list" id="modal-highlights"></ul>
       </div>
     </div>
@@ -2181,12 +2031,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Co-led and produced an Intern Roundtable video project designed to support recruitment for the next intern cohort. Worked with fellow interns to shape the concept, coordinate production, and deliver a polished piece that communicated the intern experience in an engaging and authentic way.",
+        description: "Co-led a recruitment video featuring interns in conversation about their work and experience. Helped shape the concept, coordinate production, and deliver a clear, polished piece for future applicants.",
         highlights: [
           "10K+ reach and 700+ engagements",
           "Co-led concept development and production with a cross-intern team",
-          "Helped drive stronger applicant interest than the previous cycle",
-          "Cited by multiple candidates during the interview process"
+          "Supported stronger applicant interest than the previous cycle",
+          "Mentioned by multiple candidates during interviews"
         ],
         coverImage: "p1-0.png",
         images: [
@@ -2202,12 +2052,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Created a mascot-led comic series for PD’s cybersecurity awareness campaign, combining generative AI tools with careful creative direction to produce content that felt polished, original, and audience-friendly. The series helped make a technical topic more approachable and engaging.",
+        description: "Created a mascot-led comic series for a cybersecurity awareness campaign. Used generative AI with careful art direction to make a technical topic feel approachable, polished, and easy to share.",
         highlights: [
           "Nearly 3K reactions per post",
-          "Developed a recurring comic format centered on the office mascot",
-          "Used generative AI thoughtfully to support creative direction",
-          "Turned a technical topic into accessible, engaging content"
+          "Developed a recurring comic format around the office mascot",
+          "Used generative AI as a production tool under clear creative direction",
+          "Made a technical topic more accessible and engaging"
         ],
         coverImage: "p2-0.png",
         images: [
@@ -2223,11 +2073,11 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Developed a youth-oriented social campaign using Gen Alpha slang and the office mascot to connect with younger audiences in a playful, platform-native way. Though built around one post, the campaign involved multiple bespoke visuals and a tailored creative approach.",
+        description: "Developed a playful social post using Gen Alpha slang and the office mascot to connect with younger audiences. Created a set of custom visuals that made the idea feel platform-native and easy to share.",
         highlights: [
           "Most-shared Instagram post of the year",
-          "Created a culturally current campaign aimed at younger audiences",
-          "Designed multiple custom assets and supporting visuals",
+          "Created culturally current content for younger audiences",
+          "Designed multiple custom assets for one cohesive post",
           "Generated 200+ shares on AIT’s Instagram"
         ],
         coverImage: "p3-0.png",
@@ -2244,10 +2094,10 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Produced teaser reel content for the Dragon Boat Race that gained strong traction across platforms and was shared by the host city government. The piece expanded visibility beyond AIT’s own audience and became one of the standout social posts of the year.",
+        description: "Produced a teaser reel for the Dragon Boat Race that performed strongly across platforms and was reshared by the host city government. The reel expanded visibility beyond AIT’s own audience.",
         highlights: [
           "37K Facebook views and city-government repost",
-          "Produced teaser content for a major public-facing cultural event",
+          "Produced teaser content for a major public cultural event",
           "Became one of the most popular posts on AIT/K’s Instagram",
           "Delivered record Instagram video reach at the time"
         ],
@@ -2265,11 +2115,11 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "As Marketing Officer and Editor for PalTV, coordinated with production teams and student leadership to edit, publish, and promote student media projects. Produced a series of five street-interview reels built around original questions, strong pacing, and clear visual identity.",
+        description: "As Marketing Officer and Editor for PalTV, planned, edited, published, and promoted a series of street-interview reels. The series used original questions, tight pacing, and consistent visual treatments.",
         highlights: [
           "Produced and promoted 5 original vox-pop reels",
-          "Developed original questions and audience-friendly content concepts",
-          "Edited with custom visual overlays and original title sequences",
+          "Developed original questions and audience-friendly content ideas",
+          "Edited reels with custom overlays and title sequences",
           "Coordinated publishing and promotion with student leadership"
         ],
         coverImage: "p5-0.png",
@@ -2291,11 +2141,11 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Worked with an international team to develop and pitch Tripal, a community-focused virtual tour-guiding service, winning Hult Prize OnCampus at NSYSU 2024. The project combined business strategy, problem solving, and collaborative storytelling in a competitive startup environment.",
+        description: "Collaborated with an international team to develop and pitch Tripal, a community-focused virtual tour guide service. The project combined market research, business strategy, and clear storytelling, and was selected as the winning Hult Prize OnCampus 2024 pitch.",
         highlights: [
-          "Winner, Hult Prize OnCampus at NSYSU 2024",
-          "Co-developed a community-focused virtual tour service concept",
-          "Refined the business model and presentation with an international team",
+          "Collaborated on the winning Hult Prize OnCampus 2024 pitch",
+          "Co-developed a community-focused virtual tour guide concept",
+          "Refined the business model and pitch with an international team",
           "Delivered a successful pitch in a competitive startup setting"
         ],
         coverImage: "p6-0.png",
@@ -2312,12 +2162,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Curated themed book displays for American Corner, creating a consistent visual identity across digital and physical formats. The work combined visual organization, print support, and interactive elements to make the displays more engaging and cohesive.",
+        description: "Designed themed book displays for American Corner and created a consistent identity across physical and digital touchpoints. The work combined curation, print support, and simple interactive elements.",
         highlights: [
-          "Built a consistent digital and physical display identity",
+          "Built a consistent identity for physical and digital displays",
           "Curated themed displays for a public-facing cultural space",
-          "Created supporting print collateral and interactive elements",
-          "Turned routine displays into more engaging audience experiences"
+          "Created supporting print pieces and interactive elements",
+          "Made routine displays more engaging for visitors"
         ],
         coverImage: "p7-0.png",
         images: [
@@ -2333,12 +2183,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Supported a July Fourth reception by preparing end-to-end visuals and presentation materials that contributed to the event’s overall flow and presentation quality. Helped create a polished guest-facing experience through coordinated event visuals.",
+        description: "Prepared visual and presentation materials for a July Fourth reception. Helped create a polished guest-facing experience by keeping event visuals clear, consistent, and ready for use.",
         highlights: [
-          "End-to-end visuals for a high-profile reception",
-          "Prepared presentation and visual materials for a formal public event",
+          "Created visuals for a high-profile reception",
+          "Prepared presentation materials for a formal public event",
           "Supported the guest experience through clear visual coordination",
-          "Delivered polished event-facing assets under real-world deadlines"
+          "Delivered polished event assets under real deadlines"
         ],
         coverImage: "p8-0.png",
         images: [
@@ -2354,12 +2204,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Monitored audience engagement and produced accessible social media performance reports to help inform strategy. Translated platform data into clear insights that supported more informed decisions around content direction and campaign planning.",
+        description: "Monitored social media performance and turned platform data into readable reports. The work helped connect audience behavior with clearer decisions about content direction and campaign planning.",
         highlights: [
-          "Turned engagement data into actionable content insights",
+          "Turned engagement data into practical content insights",
           "Tracked audience performance across social platforms",
-          "Produced reports that made data easy to understand and act on",
-          "Supported future content and campaign planning with clear analysis"
+          "Produced reports that made data easier to understand and use",
+          "Supported future content planning with clear analysis"
         ],
         coverImage: "p9-0.png",
         images: [
@@ -2375,12 +2225,12 @@
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "Contributed to concept brainstorming and production support for a Boba Day reel created to connect with Taiwanese audiences through a culturally resonant, highly shareable idea. The campaign delivered exceptional results and became one of the strongest-performing pieces in account history.",
+        description: "Contributed to concept development and production support for an International Boba Day reel. The culturally relevant idea connected with Taiwanese audiences and became one of the account’s strongest-performing posts.",
         highlights: [
           "219K reach and 14.6K interactions",
-          "Supported concept development and production for a culturally targeted campaign",
-          "Generated 230K+ views and 14.1K likes and reactions",
-          "Became one of the strongest-performing posts in account history"
+          "Supported concept development and production for a locally relevant campaign",
+          "Generated 230K+ views and 14.1K likes/reactions",
+          "Became one of the account’s strongest-performing posts"
         ],
         coverImage: "p10-0.png",
         images: [
@@ -2784,15 +2634,15 @@
     var qualityContent = {
       quality1: {
         title: 'Committed',
-        copy: 'I stay committed to seeing ideas through with care, consistency, and follow-through, from early concepting to final execution.'
+        copy: 'I stay with a project through the unpolished middle: clarifying the brief, organizing the details, and finishing with care.'
       },
       quality2: {
         title: 'Creative',
-        copy: 'I enjoy turning rough ideas into thoughtful visual solutions, exploring different directions until something feels both clear and original.'
+        copy: 'I look for the visual angle that makes an idea easier to understand, more engaging to see, and more natural to share.'
       },
       quality3: {
         title: 'Curious',
-        copy: 'I am naturally curious, always asking questions, learning new tools, and looking deeper so the work is not only polished, but meaningful.'
+        copy: 'I ask questions, learn quickly, and use new tools with intention so the work has both polish and purpose.'
       }
     };
 
